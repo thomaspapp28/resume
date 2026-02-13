@@ -1,0 +1,23 @@
+Senior C# / .NET Developer Blockchain
+Developer
+Role Overview
+The Senior C# / .NET Developer will lead the development of fintech applications and blockchain solutions, ensuring scalability and security. This role includes team leadership, collaboration with stakeholders, and the integration of blockchain technologies into existing platforms.
+
+Key Responsibilities
+Lead the design and development of scalable fintech applications using C# and .NET Core.
+Architect blockchain solutions with integration for DeFi, smart contracts, and cryptocurrency wallets.
+Develop and maintain secure APIs and microservices.
+Collaborate with cross-functional teams to execute complex software projects.
+Conduct code reviews and ensure adherence to best practices (SOLID principles, clean code).
+Mentor junior developers, providing guidance on coding and blockchain principles.
+Stay updated with emerging blockchain technologies like Ethereum, Hyperledger, and Layer 2 scaling solutions.
+Experience Required
+7+ years in C#, .NET, and REST API development.
+3+ years in blockchain development (Solidity, Ethereum).
+Experience with blockchain platforms (Ethereum, Hyperledger) and smart contracts.
+Proficiency in microservices architecture, RESTful API design, and cloud platforms (Azure/AWS).
+Key Skills Required
+Familiarity with DeFi protocols, tokenization, and Web3.
+Proficiency with SQL Server, MongoDB, or PostgreSQL.
+Experience with Docker, Kubernetes, and CI/CD pipelines.
+Excellent problem-solving skills and agile work experience.

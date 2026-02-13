@@ -1,0 +1,66 @@
+Thomas Marklin Pappas
+Senior C# / .NET Developer | C#, .NET Core, Blockchain, Solidity, Azure, AWS, React
+
+thomaspapp3.work@gmail.com   +1 (227) 222-8188    Plant City, FL 33566
+
+PROFILE
+Senior Software Engineer with 12 years of experience building scalable fintech applications and enterprise platforms using C#, .NET Core, Python, and modern front-end frameworks. Proficient in blockchain development with Solidity and Ethereum, microservices architecture, RESTful API design, and cloud platforms including Azure and AWS. Experienced in mentoring development teams, driving Agile delivery, and integrating emerging technologies like DeFi protocols and smart contracts into production systems to deliver secure, high-performance financial solutions.
+
+Back-End Development: C#, .NET Core, ASP.NET Web API, Python, Django, FastAPI, Entity Framework, Dapper, RESTful API Design, gRPC, Microservices Architecture, SOLID Principles, Clean Architecture, Domain-Driven Design (DDD), Celery, JWT.
+Blockchain & Web3: Solidity, Ethereum, Hyperledger Fabric, Smart Contracts, Web3.js, Ethers.js, DeFi Protocols, Tokenization, Cryptocurrency Wallet Integration, Layer 2 Scaling Solutions, Truffle, Hardhat.
+Front-End Development: JavaScript, TypeScript, React, Angular, Redux, Context API, HTML5, CSS3, Bootstrap, Material UI.
+Database Management: SQL Server, PostgreSQL, MongoDB, DynamoDB, MySQL, Query Optimization, Indexing, Partitioning, Stored Procedures.
+Cloud & DevOps: Azure (App Service, Functions, Service Bus, Azure SQL, Blob Storage, Key Vault), AWS (Lambda, ECS, EKS, SNS, SQS, API Gateway, RDS, S3, CloudWatch), Docker, Kubernetes, Terraform, Jenkins, GitHub Actions, CI/CD Pipelines.
+Testing & Security: Unit & Integration Testing (xUnit, NUnit, PyTest, Jest, Selenium), API Testing (Postman, Swagger), OAuth2, OpenID Connect, JWT, RBAC.
+
+WORK EXPERIENCE
+Senior .NET Blockchain Developer – Wipro
+May 2025 – Present  USA - Remote
+Lead the architecture and development of blockchain-integrated fintech platform services, delivering secure and scalable applications that power decentralized finance operations and cryptocurrency wallet management for enterprise clients.
+- 	Design and develop high-performance microservices using C# and .NET Core with ASP.NET Web API, implementing clean architecture and SOLID principles to support DeFi protocol integrations and real-time transaction processing.
+- 	Architect and deploy Ethereum-based smart contracts using Solidity and Hardhat, enabling tokenization workflows, automated escrow services, and cryptocurrency wallet interactions across the platform.
+- 	Build and maintain secure RESTful APIs that facilitate communication between blockchain nodes, internal fintech services, and third-party payment processors, achieving 99.9%+ uptime and sub-100ms response times.
+- 	Implement Web3 integration layer using Ethers.js and .NET libraries, connecting platform services to Ethereum mainnet and Layer 2 scaling solutions for reduced gas fees and improved throughput.
+- 	Manage production deployments on Azure using Docker and Kubernetes, with CI/CD pipelines automated through GitHub Actions and infrastructure-as-code via Terraform for consistent, repeatable releases.
+- 	Conduct thorough code reviews enforcing SOLID principles and clean code standards, while mentoring junior developers on blockchain fundamentals, smart contract security patterns, and .NET best practices.
+- 	Collaborate with cross-functional teams in Agile Scrum ceremonies, coordinating with product owners, security analysts, and QA engineers to deliver complex blockchain features on schedule.
+
+Senior .NET Developer – Robert Half
+Feb 2021 – May 2025  USA - Remote
+Contributed to the development of technology-driven financial services solutions, building secure transaction platforms and payment processing systems that improved digital workflows, regulatory compliance, and customer experience across lending and real estate verticals.
+- 	Architected and developed scalable fintech microservices using C# and .NET Core, applying domain-driven design and clean architecture patterns to ensure modularity and long-term maintainability across distributed systems.
+- 	Designed and integrated robust RESTful APIs using ASP.NET Web API and Entity Framework, enabling seamless communication between internal financial services, third-party banking platforms, and compliance systems.
+- 	Managed and optimized SQL Server and PostgreSQL databases, implementing query performance tuning, indexing strategies, and event-driven architectures with Azure Service Bus and AWS SNS/SQS for reliable real-time data processing.
+- 	Spearheaded front-end modernization by migrating legacy UI components to React with TypeScript, leveraging Redux for state management and improving user experience across customer-facing financial dashboards.
+- 	Automated CI/CD pipelines using GitHub Actions and Azure DevOps, streamlining deployment through containerized microservices with Docker and Kubernetes while enforcing infrastructure-as-code practices with Terraform.
+- 	Enhanced platform security by implementing OAuth2, JWT authentication, role-based access control (RBAC), and Azure Key Vault integration, ensuring compliance with financial industry security standards and audit requirements.
+- 	Mentored junior developers through pair programming and detailed code reviews, participated in Agile sprint planning, and contributed to strategic architectural decisions that shaped the platform's technical roadmap.
+
+Senior Engineer – GlobalLogic
+June 2015 – Dec 2020  Santa Clara, CA
+Developed and optimized fleet and field service management solutions, focusing on real-time GPS tracking, telematics, vehicle diagnostics, and workflow automation to improve fleet efficiency, driver safety, and operational cost reduction.
+- 	Designed and developed cloud-native microservices using Python with FastAPI and Flask, implementing event-driven architectures to process high-volume telematics data from GPS devices and IoT sensors efficiently.
+- 	Built and optimized RESTful and gRPC APIs to facilitate seamless data exchange between fleet tracking applications, customer dashboards, and third-party logistics software, significantly improving system responsiveness and data accuracy.
+- 	Developed a highly responsive real-time vehicle tracking system using WebSockets and Celery, allowing instant location updates, geofencing alerts, and live telemetry streaming for thousands of connected vehicles.
+- 	Engineered data ingestion pipelines using Kafka and AWS Kinesis, processing and aggregating large-scale GPS and telematics data streams in real-time, reducing latency by 40% and improving overall system reliability.
+- 	Created dynamic and interactive fleet management dashboards using React, integrating real-time data visualizations, interactive maps with MongoDB geospatial queries, and historical analytics tools to enhance operational decision-making.
+- 	Optimized PostgreSQL and DynamoDB databases to handle telematics data efficiently, employing indexing strategies, partitioning, and time-series data optimizations to boost analytics query performance by 3x.
+
+Software Engineer – Infotech
+Nov 2013 – May 2015  Gainesville, FL
+Built and enhanced software solutions for the infrastructure and construction industries, improving bidding processes, project management, and regulatory compliance to support public and private sector development projects.
+- 	Designed and built scalable web applications using C#, ASP.NET MVC, and JavaScript, implementing dynamic and responsive UIs with Bootstrap and jQuery AJAX to improve user interaction and experience.
+- 	Developed and optimized SQL Server database schemas, creating stored procedures, complex views, and indexing strategies to ensure efficient data retrieval and transaction processing.
+- 	Migrated legacy desktop applications to modern web-based solutions, transitioning VB.NET WinForms systems to ASP.NET MVC applications to improve maintainability and accessibility.
+- 	Created custom reporting solutions using SQL Server Reporting Services (SSRS), automating financial, project, and compliance reports for government and enterprise clients, improving reporting efficiency by 60%.
+- 	Enhanced system performance by profiling ASP.NET applications, refactoring inefficient business logic, resolving memory leaks, and implementing async patterns to boost application responsiveness.
+
+EDUCATION
+University of Florida – Bachelor of Computer Science
+2009 - 2013 	Gainesville, FL
+
+CERTIFICATIONS
+- 	AWS Certified Solutions Architect	AWS
+- 	Microsoft Certified: Azure Developer Associate	Microsoft
+- 	Blockchain Specialization Certificate	Coursera
+- 	Problem Solving Certificate	HackerRank

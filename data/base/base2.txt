@@ -1,0 +1,69 @@
+Thomas Marklin Pappas
+Senior Software Engineer | Python, Django, Fast API, React, AWS, Azure
+
+thomaspapp3.work@gmail.com   +1 (227) 222-8188    Plant City, FL 33566 
+
+PROFILE
+Senior Full Stack Developer with 12 years of experience building scalable web applications using Python, Django, Flask, FastAPI, and modern front-end frameworks like React. Skilled in designing and developing robust APIs, microservices, and cloud-based solutions on AWS. Experienced in Agile methodologies, CI/CD pipelines, and DevOps practices to streamline development and deployment. Passionate about writing clean, maintainable code and delivering high-performance, enterprise-grade solutions.
+
+Back-End Development: Python, Django, Flask, FastAPI, SQLite, SQLAlchemy, C++, Java, RESTful API design, Microservices architecture, WebSockets, Celery, JWT, Clean Architecture, Domain-Driven Design (DDD).
+Front-End Development: JavaScript, Angular, React, TypeScript, Redux, RxJS, Context API, HTML5, CSS3, Bootstrap, Material UI.
+Database Management: PostgreSQL, MySQL, SQL Server, DynamoDB, MongoDB, Firestore, Query Optimization, Indexing, Partitioning, Stored Procedures.
+Tools & DevOps: Docker, Kubernetes, Jenkins, TeamCity, CircleCI, Terraform, Infrastructure-as-Code (IaC), 
+Cloud Services: AWS (Lambda, ECS, EKS, DynamoDB, SNS, SQS, API Gateway, RDS, S3, CloudWatch), GCP (Cloud Functions, Firebase, Pub/Sub, Cloud SQL), Kubernetes, Docker, Terraform, Jenkins, GitHub Actions, CI/CD Pipelines
+Testing & Security: Unit & Integration Testing (PyTest, Unittest, Jest, Cypress, Selenium), API Testing (Postman, Swagger), Authentication & Authorization (OAuth2, OpenID Connect, JWT, RBAC).
+
+WORK EXPERIENCE
+Senior Software Engineer – Wipro
+May 2025 – Present  USA - Remote 
+Engineered and optimized enterprise-scale AI/ML embedding and feature platform services, delivering high-performance microservices using Rust and Python that power machine learning operations for millions of users.
+- 	Designed and maintained RESTful API services in Python (FastAPI) for embedding platform operations, feature data CRUD, and orchestrating Spark/Ray job execution with 99.9%+ uptime. 
+-	Developed high-performance similarity search service using Rust and Milvus vector database, achieving sub-50ms P99 latency while handling millions of daily queries. 
+-	Created Python SDK (ml-client) providing type-safe interface for platform users, reducing API integration complexity and improving developer experience across internal teams. 
+-	Implemented comprehensive E2E testing suite in Python (pytest) and deployment automation services managing CI/CD pipelines, configuration management, and infrastructure-as-code across all microservices. 
+-	Managed production on-call rotation, troubleshooting critical incidents with rapid resolution times while maintaining strict SLA compliance and system reliability. 
+-	Optimized service performance through profiling, bug fixing, and code refactoring, improving response times and resource efficiency across Rust and Python microservices. 
+-	Collaborated with senior engineers in Agile environment using Radar ticketing, Rio CI pipelines, and Slack, demonstrating strong adaptability in Rust, Python, and Shell scripting to deliver scalable, production-ready solutions.
+
+Senior Software Engineer – Robert Half
+Feb 2021 – May 2025  USA - Remote 
+Contributed to the development of technology-driven solutions that enhance homebuilding and interior design processes, optimizing digital workflows and automation to improve efficiency and customer experience in construction and real estate services.
+-	Architecting and developing highly scalable, high-performance microservices using Django and FastAPI, applying clean architecture and domain-driven design (DDD) principles to ensure modularity and maintainability across the system.
+-	Designing and integrating robust and efficient RESTful and GraphQL APIs that facilitate seamless communication between multiple internal services, third-party platforms, and financial systems, improving workflow automation and data consistency.
+-	Managing and optimizing PostgreSQL and DynamoDB, implementing query performance tuning techniques, indexing strategies, and event-driven architectures with AWS SNS and SQS to maintain real-time data processing and reliability.
+-	Spearheading the modernization of front-end applications by migrating legacy UI components to React, leveraging Redux and Context API for optimized state management, and ensuring an improved user experience.
+-	Automating the CI/CD pipeline using GitHub Actions, streamlining the deployment process through containerized microservices with Docker and Kubernetes, while enforcing infrastructure-as-code (IaC) practices through Terraform for scalability and efficiency.
+-	Enhancing security measures by implementing OAuth2, JWT authentication, role-based access control (RBAC), and API gateway security policies, ensuring compliance with security best practices and industry standards.
+-	Collaborating closely with cross-functional teams, engaging in Agile Scrum ceremonies, participating in sprint planning, conducting detailed code reviews, mentoring junior developers, and contributing to strategic technical decisions to drive innovation.
+
+Senior Engineer – GlobalLogic
+June 2015 – Dec 2020  Santa Clara, CA 
+Developed and optimized fleet and field service management solutions, focusing on real-time GPS tracking, telematics, vehicle diagnostics, and workflow automation to improve fleet efficiency, driver safety, and operational cost reduction
+-	Designed and developed cloud-native microservices utilizing FastAPI and Flask, implementing event-driven architectures to process high-volume telematics data from GPS devices and IoT sensors efficiently.
+-	Built and optimized RESTful and gRPC APIs to facilitate seamless data exchange between fleet tracking applications, customer dashboards, and third-party logistics software, significantly improving system responsiveness and data accuracy.
+-	Developed a highly responsive real-time vehicle tracking system using WebSockets and Celery, allowing instant location updates, geofencing alerts, and live telemetry streaming for thousands of connected vehicles.
+-	Engineered data ingestion pipelines using Kafka and AWS Kinesis, processing and aggregating large-scale GPS and telematics data streams in real-time, reducing latency and improving overall system reliability.
+-	Created dynamic and interactive fleet management dashboards using React, integrating real-time data visualizations, interactive maps, and historical analytics tools to enhance user experience and operational decision-making.
+-	Optimized PostgreSQL and DynamoDB databases to handle telematics data efficiently, employing indexing strategies, partitioning, and time-series data optimizations to boost analytics performance.
+
+
+Software Engineer – Infotech
+Nov 2013 – May 2015  Gainesville, FL
+Built and enhanced software solutions for the infrastructure and construction industries, improving bidding processes, project management, and regulatory compliance to support public and private sector development projects.
+-	Designed and built scalable web applications using Python, Django, and JavaScript, implementing dynamic and responsive UIs with Bootstrap and AJAX to improve user interaction and experience.
+-	Developed and optimized PostgreSQL database schemas, creating stored procedures, complex views, and indexing strategies to ensure efficient data retrieval and transaction processing.
+-	Migrated legacy desktop applications to modern web-based solutions, transitioning VB.NET-based systems to Django applications to improve maintainability and accessibility.
+-	Created custom reporting solutions using SQL Server Reporting Services (SSRS), automating financial, project, and compliance reports for government and enterprise clients, improving reporting efficiency.
+-	Enhanced system performance by profiling Django applications, refactoring inefficient business logic, resolving memory leaks, and implementing multi-threading to boost application responsiveness.
+
+
+EDUCATION
+University of Florida – Bachelor of Computer Science
+2009 - 2013 	Gainesville, FL
+
+
+CERTIFICATIONS
+-	Meta Full Stack Developer Certificate	Coursera
+-	AWS Certified Solutions Architect   AWS
+-	Python Programming Specialist	Oracle
+-	Problem Solving Certificate		HackerRank

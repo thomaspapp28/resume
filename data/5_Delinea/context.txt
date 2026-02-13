@@ -1,0 +1,67 @@
+Thomas Marklin Pappas
+Senior C# Software Engineer | C#, .NET, Azure, Kubernetes, Terraform, SQL
+
+thomaspapp3.work@gmail.com   +1 (227) 222-8188    Plant City, FL 33566
+
+PROFILE
+Senior Software Engineer with 12 years of experience building scalable cloud-based applications and microservices using C# .NET, Python, and modern cloud platforms including Microsoft Azure and AWS. Proficient in Kubernetes, Terraform, CI/CD pipelines, database design across SQL and NoSQL systems, and integrating AI/ML capabilities into distributed platforms. Passionate about mentoring engineering peers, driving innovation in identity security and access management, and delivering high-performance, enterprise-grade solutions within Agile environments.
+
+Back-End Development: C#, .NET, ASP.NET Core, Python, Django, FastAPI, Flask, RESTful API Design, gRPC, Microservices Architecture, Event-Driven Architecture, WebSockets, Celery, Domain-Driven Design (DDD), Clean Architecture, Model Context Protocol (MCP).
+Front-End Development: JavaScript, TypeScript, React, Angular, Redux, HTML5, CSS3, Bootstrap, Material UI.
+Database Management: Azure SQL, Cosmos DB, PostgreSQL, MongoDB, MySQL, SQL Server, DynamoDB, Query Optimization, Indexing, Partitioning, Stored Procedures, Data Modeling, Replication, High Availability.
+Cloud & Infrastructure: Azure (Azure SQL, Cosmos DB, Azure DevOps, Azure Kubernetes Service, Azure Functions, App Service, Key Vault), AWS (Lambda, ECS, EKS, DynamoDB, SNS, SQS, S3, CloudWatch, RDS), Terraform, Infrastructure as Code (IaC).
+Tools & DevOps: Docker, Kubernetes, Azure DevOps, GitHub Actions, Jenkins, CI/CD Pipelines, Datadog, Grafana.
+AI/ML & Security: AI/ML Integration, Model Context Protocol (MCP), OAuth2, OpenID Connect, JWT, RBAC, Zero Trust Architecture, Identity & Access Management, Privileged Access Control, API Gateway Security.
+Testing: Unit & Integration Testing (xUnit, NUnit, PyTest, Jest, Selenium), API Testing (Postman, Swagger).
+
+WORK EXPERIENCE
+Senior Software Engineer – Wipro
+May 2025 – Present  USA - Remote
+Architect and deliver secure, scalable platform services for an enterprise identity and access management product, designing cloud-native microservices that power intelligent authorization and contextual security for millions of end users.
+- 	Design and develop secure microservices using C# .NET and ASP.NET Core, following clean architecture and domain-driven design principles aligned with cloud security and identity management standards.
+-	Lead the integration of AI-driven automation features using the Model Context Protocol (MCP), enabling intelligent, context-aware access decisions and adaptive policy enforcement across the platform.
+-	Develop and optimize database schemas, queries, and stored procedures across Azure SQL and Cosmos DB, ensuring data integrity, transactional consistency, and high availability within distributed microservice environments.
+-	Implement Infrastructure as Code (IaC) using Terraform for consistent provisioning and lifecycle management of Azure resources including AKS clusters, Azure SQL, and Key Vault.
+-	Build and maintain CI/CD pipelines through Azure DevOps, automating secure deployments of containerized workloads to Kubernetes with zero-downtime release strategies.
+-	Configure observability and monitoring using Datadog and Grafana dashboards, enabling real-time diagnostics, alerting, and performance profiling across all production microservices.
+-	Collaborate with architects, product managers, and DevOps teams in Agile ceremonies, conducting code and design reviews focused on performance, security, and maintainability while mentoring junior engineers.
+
+Senior Platform Engineer – Robert Half
+Feb 2021 – May 2025  USA - Remote
+Contributed to the development of technology-driven solutions that enhance homebuilding and interior design processes, optimizing digital workflows and automation to improve efficiency and customer experience in construction and real estate services.
+-	Architected and developed scalable microservices using C# .NET and FastAPI, applying event-driven architectures with Azure Service Bus and API gateway patterns to enable seamless communication between internal services and third-party platforms.
+-	Designed and maintained relational and NoSQL database layers across PostgreSQL, Azure SQL, and Cosmos DB, implementing query performance tuning, indexing strategies, and replication for high availability.
+-	Deployed and orchestrated containerized workloads on Azure Kubernetes Service (AKS), managing Helm charts and scaling policies to support high-throughput transaction processing across distributed systems.
+-	Automated CI/CD pipelines using GitHub Actions and Azure DevOps, streamlining the deployment process through Docker containers while enforcing infrastructure-as-code practices with Terraform for repeatable Azure provisioning.
+-	Spearheaded the modernization of front-end applications by migrating legacy UI components to React with TypeScript, leveraging Redux for optimized state management and improving overall user experience.
+-	Enhanced security measures by implementing OAuth2, JWT authentication, role-based access control (RBAC), and Zero Trust principles, ensuring compliance with identity management best practices and industry standards.
+-	Collaborated closely with cross-functional teams, participating in sprint planning, conducting detailed code reviews, mentoring junior developers, and contributing to strategic technical decisions to drive platform innovation.
+
+Senior Engineer – GlobalLogic
+June 2015 – Dec 2020  Santa Clara, CA
+Developed and optimized fleet and field service management solutions, focusing on real-time GPS tracking, telematics, vehicle diagnostics, and workflow automation to improve fleet efficiency, driver safety, and operational cost reduction.
+-	Designed and developed cloud-native microservices using C# .NET and Flask, implementing event-driven architectures to process high-volume telematics data from GPS devices and IoT sensors efficiently.
+-	Built and optimized RESTful and gRPC APIs to facilitate seamless data exchange between fleet tracking applications, customer dashboards, and third-party logistics software, significantly improving system responsiveness and data accuracy.
+-	Developed a highly responsive real-time vehicle tracking system using WebSockets and Celery, allowing instant location updates, geofencing alerts, and live telemetry streaming for thousands of connected vehicles.
+-	Engineered data ingestion pipelines using Kafka and AWS Kinesis, processing and aggregating large-scale GPS and telematics data streams in real-time, reducing latency and improving overall system reliability.
+-	Created dynamic and interactive fleet management dashboards using React, integrating real-time data visualizations, interactive maps, and historical analytics tools to enhance user experience and operational decision-making.
+-	Optimized PostgreSQL and SQL Server databases to handle telematics data efficiently, employing indexing strategies, partitioning, and time-series data optimizations to boost analytics performance by 40%.
+
+Software Engineer – Infotech
+Nov 2013 – May 2015  Gainesville, FL
+Built and enhanced software solutions for the infrastructure and construction industries, improving bidding processes, project management, and regulatory compliance to support public and private sector development projects.
+-	Designed and built scalable web applications using C#, ASP.NET MVC, and JavaScript, implementing dynamic and responsive UIs with Bootstrap and jQuery to improve user interaction and experience.
+-	Developed and optimized SQL Server database schemas, creating stored procedures, complex views, and indexing strategies to ensure efficient data retrieval and transaction processing.
+-	Migrated legacy desktop applications to modern web-based solutions, transitioning VB.NET WinForms systems to ASP.NET MVC applications to improve maintainability and accessibility.
+-	Created custom reporting solutions using SQL Server Reporting Services (SSRS), automating financial, project, and compliance reports for government and enterprise clients, improving reporting efficiency by 30%.
+-	Enhanced system performance by profiling .NET applications, refactoring inefficient business logic, resolving memory leaks, and implementing async patterns to boost application responsiveness.
+
+EDUCATION
+University of Florida – Bachelor of Computer Science
+2009 - 2013 	Gainesville, FL
+
+CERTIFICATIONS
+-	AWS Certified Solutions Architect	AWS
+-	Microsoft Certified: Azure Developer Associate	Microsoft
+-	Terraform Associate	HashiCorp
+-	Problem Solving Certificate	HackerRank

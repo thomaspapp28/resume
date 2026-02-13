@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume from Job Description</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f12;
+      --surface: #18181c;
+      --border: #2a2a30;
+      --text: #e4e4e7;
+      --muted: #71717a;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --success: #22c55e;
+      --error: #ef4444;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+    textarea {
+      width: 100%;
+      min-height: 200px;
+      padding: 1rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      resize: vertical;
+      transition: border-color 0.2s;
+    }
+    textarea::placeholder {
+      color: var(--muted);
+    }
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    button {
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.65rem 1.25rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.05s;
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+    .btn-primary:hover:not(:disabled) {
+      background: var(--accent-hover);
+    }
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--border);
+    }
+    .btn-secondary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .status {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .status.loading {
+      color: var(--accent);
+    }
+    .status.error {
+      color: var(--error);
+    }
+    .status.success {
+      color: var(--success);
+    }
+    .result-section {
+      margin-top: 2.5rem;
+    }
+    .result-section h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 0 0 0.75rem;
+    }
+    .result-text {
+      width: 100%;
+      min-height: 280px;
+      padding: 1rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+      resize: vertical;
+    }
+    .result-actions {
+      margin-top: 0.75rem;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Resume from Job Description</h1>
+    <p class="subtitle">Paste a job description below. We’ll tailor your base resume to it and give you the text and a Word file.</p>
+
+    <label for="jd">Job description</label>
+    <textarea id="jd" placeholder="Paste the full job description here…"></textarea>
+
+    <div class="actions">
+      <button type="button" id="generate" class="btn-primary">Generate resume</button>
+      <button type="button" id="download" class="btn-secondary hidden">Download .docx</button>
+      <button type="button" id="downloadPdf" class="btn-secondary hidden">Download .pdf</button>
+      <span id="status" class="status"></span>
+    </div>
+
+    <div id="result-section" class="result-section hidden">
+      <h2>Tailored resume</h2>
+      <textarea id="result-text" class="result-text" readonly></textarea>
+      <div class="result-actions">
+        <button type="button" id="copy-text" class="btn-secondary">Copy text</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const jdEl = document.getElementById('jd');
+    const generateBtn = document.getElementById('generate');
+    const downloadBtn = document.getElementById('download');
+    const downloadPdfBtn = document.getElementById('downloadPdf');
+    const statusEl = document.getElementById('status');
+    const resultSection = document.getElementById('result-section');
+    const resultText = document.getElementById('result-text');
+    const copyTextBtn = document.getElementById('copy-text');
+
+    let lastDocxBase64 = null;
+    let lastPdfBase64 = null;
+    let lastDocxFilename = 'resume.docx';
+    let lastPdfFilename = 'resume.pdf';
+
+    function setStatus(msg, type = '') {
+      statusEl.textContent = msg;
+      statusEl.className = 'status' + (type ? ' ' + type : '');
+    }
+
+    function downloadBlob(base64, mimeType, filename) {
+      if (!base64) return;
+      const bin = atob(base64);
+      const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      const blob = new Blob([bytes], { type: mimeType });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function showResult(resumeText, docxBase64, pdfBase64, docxFilename, pdfFilename, savedDir, savedFiles) {
+      lastDocxBase64 = docxBase64 || null;
+      lastPdfBase64 = pdfBase64 || null;
+      lastDocxFilename = docxFilename || 'resume.docx';
+      lastPdfFilename = pdfFilename || 'resume.pdf';
+      resultText.value = resumeText;
+      resultSection.classList.remove('hidden');
+      downloadBtn.classList.toggle('hidden', !docxBase64);
+      downloadPdfBtn.classList.toggle('hidden', !pdfBase64);
+      const dirMsg = savedDir ? 'Saved to data/' + savedDir + '/' + (savedFiles && savedFiles.length ? ' (' + savedFiles.join(', ') + '). ' : '. ') : '';
+      setStatus('Done. ' + dirMsg + 'You can copy the text or download .docx / .pdf.', 'success');
+    }
+
+    generateBtn.addEventListener('click', async () => {
+      const jd = jdEl.value.trim();
+      if (!jd) {
+        setStatus('Please paste a job description first.', 'error');
+        return;
+      }
+      generateBtn.disabled = true;
+      setStatus('Generating resume…', 'loading');
+      resultSection.classList.add('hidden');
+      lastDocxBase64 = null;
+      lastPdfBase64 = null;
+
+      try {
+        const res = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ job_description: jd }),
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok) {
+          setStatus(data.error || 'Request failed', 'error');
+          return;
+        }
+        showResult(data.resume_text || '', data.docx_base64 || null, data.pdf_base64 || null, data.docx_filename || '', data.pdf_filename || '', data.saved_dir || '', data.saved_files || []);
+      } catch (e) {
+        setStatus('Network error: ' + (e.message || 'Unknown'), 'error');
+      } finally {
+        generateBtn.disabled = false;
+      }
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      try {
+        downloadBlob(lastDocxBase64, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', lastDocxFilename);
+      } catch (e) {
+        setStatus('Download failed', 'error');
+      }
+    });
+
+    downloadPdfBtn.addEventListener('click', () => {
+      try {
+        downloadBlob(lastPdfBase64, 'application/pdf', lastPdfFilename);
+      } catch (e) {
+        setStatus('Download failed', 'error');
+      }
+    });
+
+    copyTextBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(resultText.value);
+        setStatus('Copied to clipboard.', 'success');
+        setTimeout(() => setStatus(''), 2000);
+      } catch (e) {
+        setStatus('Copy failed', 'error');
+      }
+    });
+  </script>
+</body>
+</html>
