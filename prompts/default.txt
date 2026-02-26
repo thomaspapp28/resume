@@ -1,0 +1,82 @@
+Update my resume for best match to the job description while keeping it believable as a real human career: not every company did the same thing, and older roles must use period-appropriate technologies.
+90% of skills should be matched to the job description and 10% should be related skills that are not in the job description but are related to the job and important for the job.
+
+**1. Job Title**
+- Set to the target role or closest equivalent in style of programming language, backend frameworks, frontend framework, cloud services
+e.g: Senior Software Engineer | Python, Django, FastAPI, React, AWS
+e.g: Sr Software Engineer | C#, ASP.NET, Angular, Azure 
+
+**2. Profile Summary**
+- Rewrite in 2-3 sentences around experience and skills that align with the job description.
+- Emphasize value for the target role and include key terms from the posting.
+- Regarding to skills only one sentence for major skills, others for achievements and personal skills.
+- Do not mention any numbers in the profile summary except years of experience.
+
+**3. Skills Section**
+- Do not mention exact version of the technology and skills.
+- Every required and preferred skill from the job description must appear somewhere on the resume (skills section and/or work experience). And add some related skills that are not in the job description but are related to the job description and important for the job.
+- List only skills I actually possess; prioritize and group by category (e.g. Back-End, Front-End, Cloud, Tools).
+- Order so the most relevant skills for the job are prominent.
+
+**4. Work Experience (most important)**
+
+Goal: Full coverage of job-description skills, but distributed like a real career—strongest match in the latest role, some overlap in others, early roles with legacy, period-appropriate tech only.
+
+(a) Coverage
+- Every important skill/requirement from the job description must appear somewhere (current role, past roles, or skills section).
+- If need several technical skills distribute them across the roles in the work experience. Only one work experience should have multiple technical skills regarding to similar skills, do not repeat the same skill in the same work experience. For example, if the job description requires Python, Django, Ruby Ruby on Rails, AWS and React, you can have one work experience with Python and Django, and another work experience withRuby and  Ruby on Rails because they are similar skills which are used for backend development. And React and AWS can be in the same work experience.
+- Where it fits naturally, show the skill in a role, not only in the skills list.
+- First sentence for each company is for not technical skills, focusing on business logic and project focus summary, and last company domain should be same with the job description, the other companies domain should be different from the job description.
+
+(b) Latest / most recent role (current or most recent job)
+- This role must be the strongest match to the job description around 80%. 
+- Emphasize the most important required and preferred skills here (main tech stack, key responsibilities, tools).
+- Write bullets so this role clearly shows the candidate is a strong fit for the target position.
+- Use present tense if current role, past tense if recently ended.
+
+(d) Other / middle-career roles (1–2 companies before the latest)
+- Major technology stacks on the job description should be matched in the work experience like using previous technology stacks of the same company in the same time period.
+- Show some of the job-description skills—spread across these roles so it feels like natural progression.
+- Vary focus by company (e.g. one role more API/backend, another more frontend or data) so it does not look like every company did the same thing.
+- Do not force every JD skill into every role; real resumes show different emphases at different jobs.
+
+(e) Early-career roles (oldest positions by date)
+- Use only legacy, period-appropriate frameworks, tools, and practices of the major technology stacks on the job description for that time period. If the technology stack in the job description was not exitsted in that time period, use the most related technology stack of that time period. For example, Current tech stack is Java and Spring Boot we can use legacy java frameworks at that time period like JBoss, Struts 1, Hibernate, etc.
+- Do NOT use technologies that were not common or did not exist then (e.g. no Docker/Kubernetes in 2010; no React 18 in 2012; no GenAI/LLM in 2015 unless clearly appropriate).
+- Examples for older periods: older Java/Python versions, SVN, jQuery, Bootstrap 2/3, Django 1.2, early AWS services, older RDBMS tooling, classic web stacks.
+- The experience must read as believable for someone working in that era; avoid anachronistic buzzwords.
+
+(f) General
+- Keep the same companies and date ranges as the base resume. Do not add or remove roles.
+- Through whole experience should be relate with major technology in the job description: 
+e.g: tech stack in the job description is php and symfony => for the major tech stacks could be, php and symfony, php and laravel, php...
+e.g: tech stack in the job description is only python => for the major tech stacks could be, python, python and django, python and flask, python and fastapi, python and django and fastapi, etc.
+- Important: Provide exact version of the technology stack used in the job description in the skills section and work experience. Like Python 3.10, Django 4.2, React 18, PHP 8.0 etc, do not use like python 3.x, PHP x etc.
+- For the lastest 2 positions, update the job title to the target role or closest equivalent but both not completely same with the job description. And the lastest 2 positions should be the most recent 2 positions. Keep the same job title for the other positions.
+- Consist as many as possible skills in the job description and related skills in the lastest 2 positions, and some in previous positions.
+- Keep roughly the same number of bullets per role as in the base resume.
+- Use action verbs and quantify where possible (performance, scale, team size, time saved).
+- Past tense for past roles, present tense for current role only.
+- Give me sentences like human writing, not like a robot.
+
+**5. Certifications**
+- Prioritize or add certifications that match the job description; remove or de-emphasize less relevant ones.
+- List only real, plausible certifications (no fabrication).
+
+**6. Format and style**
+- Professional, ATS-friendly wording; consistent verb tense; concise bullets.
+- No markdown, no "Updated Resume" or extra headers—only the resume text.
+
+**Output format (critical):**
+- Output ONLY the updated resume as plain text.
+- Use the EXACT same structure and section labels as the base resume:
+  - Line 1: Full name
+  - Line 2: Job title (updated) and key tech stack
+  - Line 3: blank
+  - Line 4: contact (email, phone, location) with spaces/tabs between
+  - Line 5: blank
+  - PROFILE (heading), one summary paragraph, blank, then skill lines (Category: item1, item2, ...)
+  - WORK EXPERIENCE (heading), then for each job: Job Title – Company, date/location line, one description paragraph, bullet lines starting with "-"
+  - EDUCATION (heading), school – degree, date, location
+  - CERTIFICATIONS (heading), lines like "- Certification Name	Issuer"
+- Preserve blank lines and use tab between certification name and issuer where shown in base.

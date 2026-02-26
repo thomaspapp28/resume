@@ -1,4 +1,35 @@
-/.env
-/.venv
-/venv
-/__pycache__
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Python
+.venv/
+venv/
+env/
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Node (frontend)
+node_modules/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+data/
+assets/
