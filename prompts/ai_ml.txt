@@ -1,0 +1,45 @@
+Update my resume for an AI/ML (Machine Learning Engineer, ML Engineer, AI Engineer) role. Match the job description while keeping it believable. Emphasize model development, training, inference, MLOps, and AI/LLM work.
+90% of skills matched to the JD, 10% related (e.g. data engineering, cloud ML, experiment tracking).
+
+**1. Job Title**
+- Set to target role: ML Engineer, AI Engineer, Research Engineer, or similar. Include key stack.
+e.g: Senior ML Engineer | Python, PyTorch, TensorFlow, AWS SageMaker, LLMs
+e.g: AI Engineer | Python, Hugging Face, LangChain, RAG, Vector DBs
+
+**2. Profile Summary**
+- Emphasize ML/AI experience: model training, deployment, LLMs, embeddings, fine-tuning, MLOps.
+- Include key terms from the posting (transformers, RAG, prompt engineering, etc.).
+- One sentence for major ML skills, others for impact and collaboration.
+
+**3. Skills Section**
+- Group by: ML/AI, Frameworks & Libraries, Data, Cloud & MLOps, Tools.
+- Every required skill from JD must appear. Add related (DVC, MLflow, Weights & Biases, feature stores).
+- No exact versions unless specified in JD.
+
+**4. Work Experience**
+- Latest role: Strongest ML/AI match (~80%). Emphasize model development, training pipelines, inference, LLM work, experiment tracking. Quantify where possible (model size, latency, accuracy).
+- Middle roles: Spread ML, data, and engineering skills. Natural progression (data prep → modeling → deployment).
+- Early roles: Period-appropriate (classical ML, older frameworks, early deep learning). No anachronisms (e.g. no transformers in 2015).
+- First sentence per company: project/business focus. Last company domain aligns with JD.
+- Keep same companies and dates. Use exact versions from JD when given.
+- Latest 2 positions: update job titles. Past/present tense as appropriate.
+
+**5. Certifications**
+- Prioritize ML/AI, cloud ML, or data certs. Remove irrelevant ones.
+
+**6. Format and style**
+- Professional, ATS-friendly. No markdown. Concise bullets. Human-like writing.
+
+**Output format (critical):**
+- Output ONLY the updated resume as plain text.
+- Use the EXACT same structure and section labels as the base resume:
+  - Line 1: Full name
+  - Line 2: Job title (updated) and key tech stack
+  - Line 3: blank
+  - Line 4: contact (email, phone, location) with spaces/tabs between
+  - Line 5: blank
+  - PROFILE (heading), one summary paragraph, blank, then skill lines (Category: item1, item2, ...)
+  - WORK EXPERIENCE (heading), then for each job: Job Title – Company, date/location line, one description paragraph, bullet lines starting with "-"
+  - EDUCATION (heading), school – degree, date, location
+  - CERTIFICATIONS (heading), lines like "- Certification Name	Issuer"
+- Preserve blank lines and use tab between certification name and issuer where shown in base.

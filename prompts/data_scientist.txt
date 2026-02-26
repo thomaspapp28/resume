@@ -1,0 +1,45 @@
+Update my resume for a Data Scientist role. Match the job description while keeping it believable. Emphasize analysis, experimentation, statistics, visualization, and data-driven decision-making.
+90% of skills matched to the JD, 10% related (e.g. ML, data engineering, BI tools).
+
+**1. Job Title**
+- Set to target role: Data Scientist, Senior Data Scientist, or similar. Include key stack.
+e.g: Data Scientist | Python, SQL, A/B Testing, Tableau, Machine Learning
+e.g: Senior Data Scientist | Python, R, Spark, Experimentation, Forecasting
+
+**2. Profile Summary**
+- Emphasize data science: analysis, experimentation, modeling, visualization, insights, stakeholder communication.
+- Include key terms from the posting (A/B testing, causal inference, dashboards, etc.).
+- One sentence for major skills, others for impact and collaboration.
+
+**3. Skills Section**
+- Group by: Data Science & Analysis, Programming, Data & Databases, Tools & Visualization, ML (if relevant).
+- Every required skill from JD must appear. Add related (statistics, experiment design, SQL, pandas, Spark).
+- No exact versions unless specified in JD.
+
+**4. Work Experience**
+- Latest role: Strongest data science match (~80%). Emphasize analyses, experiments, models, dashboards, insights delivered. Quantify (lift %, sample size, business impact).
+- Middle roles: Spread analysis, experimentation, and modeling skills. Vary focus (one more analytics, another more modeling).
+- Early roles: Period-appropriate (classical stats, older tools, early analytics). No anachronisms.
+- First sentence per company: business/project focus. Last company domain aligns with JD.
+- Keep same companies and dates. Use exact versions from JD when given.
+- Latest 2 positions: update job titles. Past/present tense as appropriate.
+
+**5. Certifications**
+- Prioritize data, analytics, or ML certs. Remove irrelevant ones.
+
+**6. Format and style**
+- Professional, ATS-friendly. No markdown. Concise bullets. Human-like writing.
+
+**Output format (critical):**
+- Output ONLY the updated resume as plain text.
+- Use the EXACT same structure and section labels as the base resume:
+  - Line 1: Full name
+  - Line 2: Job title (updated) and key tech stack
+  - Line 3: blank
+  - Line 4: contact (email, phone, location) with spaces/tabs between
+  - Line 5: blank
+  - PROFILE (heading), one summary paragraph, blank, then skill lines (Category: item1, item2, ...)
+  - WORK EXPERIENCE (heading), then for each job: Job Title – Company, date/location line, one description paragraph, bullet lines starting with "-"
+  - EDUCATION (heading), school – degree, date, location
+  - CERTIFICATIONS (heading), lines like "- Certification Name	Issuer"
+- Preserve blank lines and use tab between certification name and issuer where shown in base.

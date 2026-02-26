@@ -1,0 +1,45 @@
+Update my resume for a Mobile Developer role. Match the job description while keeping it believable. Emphasize iOS, Android, or cross-platform development; app lifecycle; performance; and platform guidelines.
+90% of skills matched to the JD, 10% related (e.g. CI/CD, testing, app store).
+
+**1. Job Title**
+- Set to target role: Mobile Developer, iOS Engineer, Android Engineer, or similar. Include stack.
+e.g: Senior Mobile Developer | iOS, Swift, React Native
+e.g: Android Engineer | Kotlin, Jetpack Compose, MVVM
+
+**2. Profile Summary**
+- Emphasize mobile: native or cross-platform, app development, performance, app store, platform best practices.
+- Include key terms from the posting. One sentence for major skills, others for shipped apps and collaboration.
+- Do not mention exact numbers except years of experience.
+
+**3. Skills Section**
+- Group by: Mobile (iOS/Android), Languages & Frameworks, Tools & DevOps, Other.
+- Every required skill from JD must appear. Add related (App Store, Play Store, push notifications, analytics).
+- No exact versions unless in JD.
+
+**4. Work Experience**
+- Latest role: Strongest mobile match (~80%). Emphasize app development, platform work, performance, shipped apps. Quantify (downloads, ratings, platforms).
+- Middle roles: Spread mobile and related skills. Vary focus (one more iOS, another more cross-platform or backend integration).
+- Early roles: Period-appropriate (older SDKs, Objective-C, Java for Android). No anachronisms.
+- First sentence per company: app/product focus. Last company domain aligns with JD.
+- Keep same companies and dates. Use exact versions from JD (Swift 5, Kotlin 1.9, React Native 0.72, etc.) when given.
+- Latest 2 positions: update job titles. Past/present tense as appropriate.
+
+**5. Certifications**
+- Prioritize mobile or platform certs. Remove irrelevant ones.
+
+**6. Format and style**
+- Professional, ATS-friendly. No markdown. Concise bullets. Human-like writing.
+
+**Output format (critical):**
+- Output ONLY the updated resume as plain text.
+- Use the EXACT same structure and section labels as the base resume:
+  - Line 1: Full name
+  - Line 2: Job title (updated) and key tech stack
+  - Line 3: blank
+  - Line 4: contact (email, phone, location) with spaces/tabs between
+  - Line 5: blank
+  - PROFILE (heading), one summary paragraph, blank, then skill lines (Category: item1, item2, ...)
+  - WORK EXPERIENCE (heading), then for each job: Job Title – Company, date/location line, one description paragraph, bullet lines starting with "-"
+  - EDUCATION (heading), school – degree, date, location
+  - CERTIFICATIONS (heading), lines like "- Certification Name	Issuer"
+- Preserve blank lines and use tab between certification name and issuer where shown in base.

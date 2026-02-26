@@ -1,0 +1,45 @@
+Update my resume for a Game Developer role. Match the job description while keeping it believable. Emphasize game engines, graphics, gameplay, performance, and game-specific tooling.
+90% of skills matched to the JD, 10% related (e.g. physics, networking, tooling).
+
+**1. Job Title**
+- Set to target role: Game Developer, Game Engineer, or similar. Include engine/stack.
+e.g: Game Developer | Unity, C#, Unreal Engine
+e.g: Senior Game Engineer | Unreal, C++, Blueprints, Multiplayer
+
+**2. Profile Summary**
+- Emphasize game development: engines (Unity, Unreal), gameplay systems, graphics, performance, shipped titles. Include key terms from the posting.
+- One sentence for major skills, others for shipped projects and collaboration.
+- Do not mention exact numbers except years of experience.
+
+**3. Skills Section**
+- Group by: Game Engines & Tools, Programming, Graphics & Rendering, Other (e.g. networking, physics).
+- Every required skill from JD must appear. Add related (shaders, particle systems, profiling, version control).
+- No exact versions unless in JD.
+
+**4. Work Experience**
+- Latest role: Strongest game dev match (~80%). Emphasize engine work, gameplay features, performance, shipped titles. Quantify (FPS, platforms, team size).
+- Middle roles: Spread game dev skills. Vary focus (one more gameplay, another more tools or graphics).
+- Early roles: Period-appropriate (older engines, legacy platforms). No anachronisms.
+- First sentence per company: project/genre focus. Last company domain aligns with JD.
+- Keep same companies and dates. Use exact versions from JD when given.
+- Latest 2 positions: update job titles. Past/present tense as appropriate.
+
+**5. Certifications**
+- Prioritize game dev or relevant certs. Remove irrelevant ones.
+
+**6. Format and style**
+- Professional, ATS-friendly. No markdown. Concise bullets. Human-like writing.
+
+**Output format (critical):**
+- Output ONLY the updated resume as plain text.
+- Use the EXACT same structure and section labels as the base resume:
+  - Line 1: Full name
+  - Line 2: Job title (updated) and key tech stack
+  - Line 3: blank
+  - Line 4: contact (email, phone, location) with spaces/tabs between
+  - Line 5: blank
+  - PROFILE (heading), one summary paragraph, blank, then skill lines (Category: item1, item2, ...)
+  - WORK EXPERIENCE (heading), then for each job: Job Title – Company, date/location line, one description paragraph, bullet lines starting with "-"
+  - EDUCATION (heading), school – degree, date, location
+  - CERTIFICATIONS (heading), lines like "- Certification Name	Issuer"
+- Preserve blank lines and use tab between certification name and issuer where shown in base.
