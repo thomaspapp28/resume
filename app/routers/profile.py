@@ -18,6 +18,7 @@ def _profile_to_response(p: Profile) -> ProfileResponse:
     return ProfileResponse(
         id=p.id,
         full_name=p.full_name or "",
+        subtitle=getattr(p, "subtitle", None) or "",
         email=p.email or "",
         location=p.location or "",
         phone=p.phone or "",
@@ -49,6 +50,7 @@ def get_profile(profile_id: int, db: Session = Depends(get_db)):
     return ProfileResponse(
         id=profile.id,
         full_name=profile.full_name or "",
+        subtitle=getattr(profile, "subtitle", None) or "",
         email=profile.email or "",
         location=profile.location or "",
         phone=profile.phone or "",
@@ -64,15 +66,27 @@ def create_profile(body: ProfileCreate, db: Session = Depends(get_db)):
     """Create a new profile."""
     profile = Profile(
         full_name=body.full_name,
+        subtitle=body.subtitle,
         email=body.email,
         location=body.location,
         phone=body.phone,
         work_experiences=[
-            {"company_name": w.company_name, "date_from": w.date_from, "date_to": w.date_to}
+            {
+                "company_name": w.company_name,
+                "job_title": w.job_title,
+                "date_from": w.date_from,
+                "date_to": w.date_to,
+            }
             for w in body.work_experiences
         ],
         educations=[
-            {"institution_name": e.institution_name, "date_from": e.date_from, "date_to": e.date_to}
+            {
+                "institution_name": e.institution_name,
+                "degree": e.degree,
+                "field": e.field,
+                "date_from": e.date_from,
+                "date_to": e.date_to,
+            }
             for e in body.educations
         ],
     )
@@ -91,6 +105,8 @@ def update_profile(profile_id: int, body: ProfileUpdate, db: Session = Depends(g
 
     if body.full_name is not None:
         profile.full_name = body.full_name
+    if body.subtitle is not None:
+        profile.subtitle = body.subtitle
     if body.email is not None:
         profile.email = body.email
     if body.location is not None:
@@ -99,12 +115,23 @@ def update_profile(profile_id: int, body: ProfileUpdate, db: Session = Depends(g
         profile.phone = body.phone
     if body.work_experiences is not None:
         profile.work_experiences = [
-            {"company_name": w.company_name, "date_from": w.date_from, "date_to": w.date_to}
+            {
+                "company_name": w.company_name,
+                "job_title": w.job_title,
+                "date_from": w.date_from,
+                "date_to": w.date_to,
+            }
             for w in body.work_experiences
         ]
     if body.educations is not None:
         profile.educations = [
-            {"institution_name": e.institution_name, "date_from": e.date_from, "date_to": e.date_to}
+            {
+                "institution_name": e.institution_name,
+                "degree": e.degree,
+                "field": e.field,
+                "date_from": e.date_from,
+                "date_to": e.date_to,
+            }
             for e in body.educations
         ]
 

@@ -1,29 +1,272 @@
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
-  min-height: 100%;
+/* Page layout - fit viewport */
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
 }
 
-@media (min-width: 1024px) {
-  .container {
-    padding: 2rem 2rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .container {
-    padding: 1.5rem 1rem;
-  }
-}
-
-.headerRow {
+.pageHeader {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-  flex-wrap: wrap;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.btnSidebarToggle {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btnSidebarToggle:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.btnShowSidebar {
+  flex-shrink: 0;
+  width: 36px;
+  padding: 1rem 0.5rem;
+  background: var(--bg-elevated);
+  border-right: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  border: none;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnShowSidebar:hover {
+  background: var(--surface-hover);
+  color: var(--accent);
+}
+
+.pageTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.pageTitleIcon {
+  color: var(--accent) !important;
+  font-size: 1.35rem !important;
+}
+
+.btnAddProfileIcon {
+  font-size: 1rem !important;
+  margin-right: 0.4rem;
+  vertical-align: -0.2em;
+}
+
+.sectionIcon {
+  color: var(--accent) !important;
+  font-size: 1rem !important;
+  opacity: 0.9;
+}
+
+.btnAddIcon {
+  font-size: 1rem !important;
+  margin-right: 0.35rem;
+  vertical-align: -0.2em;
+}
+
+.btnIcon {
+  font-size: 1rem !important;
+  margin-right: 0.35rem;
+  vertical-align: -0.2em;
+}
+
+.btnActionIcon {
+  font-size: 0.95rem !important;
+  margin-right: 0.35rem;
+  vertical-align: -0.2em;
+}
+
+.layout {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Resize handle */
+.resizeHandle {
+  position: relative;
+  width: 6px;
+  min-width: 6px;
+  flex-shrink: 0;
+  cursor: col-resize;
+  background: var(--border);
+  transition: background 0.15s;
+}
+
+.resizeHandle:hover,
+.resizeHandleActive {
+  background: var(--accent);
+}
+
+.resizeHandle::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -4px;
+  right: -4px;
+}
+
+/* Sidebar - profile list */
+.sidebar {
+  width: 280px;
+  min-width: 200px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-elevated);
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.sidebarTitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.sidebarCount {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: var(--surface);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius);
+}
+
+.sidebarEmpty {
+  padding: 1.5rem;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+}
+
+.sidebarEmpty p {
+  margin: 0;
+}
+
+.profileList {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.profileListItem {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 0.875rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.profileListItem:hover {
+  border-color: var(--border-focus);
+}
+
+.profileListItemActive {
+  background: var(--accent-muted);
+  border-color: var(--accent);
+}
+
+.profileListItemActive:hover {
+  border-color: var(--accent);
+}
+
+.profileListName {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+  color: var(--accent);
+}
+
+.profileListMeta {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Main content area */
+.main {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.formWrapper {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .btnAddProfile {
@@ -117,20 +360,75 @@
   border-color: var(--error);
 }
 
-.formPanel {
+.btnAction {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
   background: var(--surface);
   border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.btnAction:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+
+.btnActionDanger:hover {
+  background: var(--error-muted);
+  color: var(--error);
+  border-color: var(--error);
+}
+
+.formPanel {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  background: var(--surface);
   border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  margin-top: 1rem;
-  box-shadow: var(--shadow);
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.formPanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+
+.formPanelBack {
+  padding: 0.4rem 0.5rem;
+  font-size: 1.1rem;
+  background: var(--surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1;
+  transition: background 0.15s, color 0.15s;
+}
+
+.formPanelBack:hover {
+  background: var(--surface-hover);
+  color: var(--text);
 }
 
 .formPanelTitle {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text);
-  margin: 0 0 1.25rem;
+  margin: 0;
 }
 
 .btnSecondary {
@@ -164,12 +462,8 @@
   background: var(--error-muted);
 }
 
-.header {
-  margin-bottom: 2rem;
-}
-
 .title {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--text);
@@ -187,38 +481,46 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.25rem;
 }
 
 .section {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
+  padding: 0;
 }
 
 .sectionTitle {
-  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: var(--text);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .hint {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
-  margin: -0.5rem 0 1rem;
+  margin: -0.25rem 0 1rem;
+  line-height: 1.4;
 }
 
-.grid {
+.contactGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 1.5rem;
 }
 
-@media (max-width: 480px) {
-  .grid {
+.contactGrid .fieldFull {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+  .contactGrid {
     grid-template-columns: 1fr;
   }
 }
@@ -226,77 +528,128 @@
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
 .field label {
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
 
 .field input {
-  padding: 0.6rem 0.9rem;
+  padding: 0.55rem 0.8rem;
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   color: var(--text);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-family: inherit;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .field input:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-muted);
 }
 
 .field input::placeholder {
   color: var(--text-muted);
 }
 
-.workRow {
+.entryCard {
+  position: relative;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding-right: 2.75rem;
+}
+
+.entryRow {
   display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
+  gap: 1rem;
   margin-bottom: 0.75rem;
   flex-wrap: wrap;
 }
 
-.workCompany {
-  flex: 2 1 140px;
-  padding: 0.6rem 0.9rem;
-  background: var(--bg-elevated);
+.entryRow:last-child {
+  margin-bottom: 0;
+}
+
+.entryField {
+  flex: 1 1 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.entryField label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.entryField input {
+  padding: 0.5rem 0.75rem;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   color: var(--text);
   font-size: 0.9rem;
+  font-family: inherit;
 }
 
-.workCompany:focus {
+.entryField input:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-muted);
 }
 
-.workDate {
-  min-width: 130px;
-  flex: 0 1 130px;
-  padding: 0.6rem 0.9rem;
-  background: var(--bg-elevated);
+.entryField input::placeholder {
+  color: var(--text-muted);
+}
+
+.monthYearSelect {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.monthSelect,
+.yearSelect {
+  padding: 0.5rem 0.6rem;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   color: var(--text);
   font-size: 0.9rem;
+  font-family: inherit;
+  min-width: 0;
 }
 
-.workDate:focus {
+.monthSelect {
+  flex: 0 1 90px;
+}
+
+.yearSelect {
+  flex: 0 1 80px;
+}
+
+.monthSelect:focus,
+.yearSelect:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-muted);
 }
 
-.workDate:disabled {
+.monthSelect:disabled,
+.yearSelect:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
@@ -304,8 +657,8 @@
 .dateToGroup {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  flex: 0 1 auto;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .presentCheck {
@@ -324,14 +677,18 @@
 }
 
 .btnRemove {
-  width: 36px;
-  height: 36px;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 28px;
+  height: 28px;
   padding: 0;
   background: transparent;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   color: var(--text-muted);
-  font-size: 1.25rem;
+  font-size: 1.1rem;
+  line-height: 1;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
 }
@@ -347,12 +704,12 @@
 }
 
 .btnAdd {
-  padding: 0.5rem 0.75rem;
+  padding: 0.6rem 1rem;
   background: transparent;
   border: 1px dashed var(--border);
   border-radius: var(--radius);
-  color: var(--text-muted);
-  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
   transition: border-color 0.15s, color 0.15s;
@@ -386,12 +743,9 @@
   gap: 1rem;
   align-items: center;
   flex-wrap: wrap;
-}
-
-@media (max-width: 480px) {
-  .section {
-    padding: 1rem;
-  }
+  padding-top: 1.5rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--border);
 }
 
 .btnPrimary {
@@ -433,21 +787,325 @@
   color: var(--success);
 }
 
-.loading {
-  color: var(--text-secondary);
+.loadingState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 2rem;
 }
 
+.loading {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.emptyStateIcon {
+  font-size: 3.5rem !important;
+  color: var(--text-muted) !important;
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+.emptyHint {
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0;
+  opacity: 0.9;
+}
+
+.profileCard {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.profileCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.profileCardIdentity {
+  flex: 1;
+  min-width: 0;
+}
+
+.profileCardName {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.profileCardSubtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.profileCardActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.profileCardSection {
+  margin-bottom: 1.75rem;
+}
+
+.profileCardSection:last-child {
+  margin-bottom: 0;
+}
+
+.profileCardSectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 1rem;
+  padding-left: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-left: 3px solid var(--accent);
+  border-bottom: 1px solid var(--border);
+}
+
+.profileCardSectionIcon {
+  color: var(--accent) !important;
+  font-size: 1rem !important;
+  opacity: 0.9;
+}
+
+.profileCardContact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  justify-content: space-between;
+}
+
+.profileCardContactItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.5rem 0.9rem;
+  background: var(--bg-elevated);
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+a.profileCardContactItem:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent-muted);
+  color: var(--accent);
+}
+
+.profileCardContactIcon {
+  color: var(--text-muted) !important;
+  font-size: 1rem !important;
+  flex-shrink: 0;
+}
+
+a.profileCardContactItem:hover .profileCardContactIcon {
+  color: var(--accent) !important;
+}
+
+.profileCardExperienceList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.profileCardExperienceCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.profileCardExperienceCard:hover {
+  border-color: var(--border-focus);
+}
+
+.profileCardExperienceRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.profileCardExperienceTitleBlock {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  display: inline;
+}
+
+.profileCardExperienceTitle {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.profileCardExperienceSeparator {
+  color: var(--text-muted);
+  font-weight: 500;
+  margin: 0 0.25rem;
+}
+
+.profileCardExperienceCompany {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.profileCardExperienceDate {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.profileCardEmpty {
+  color: var(--text-muted);
+  margin: 0;
+  font-style: italic;
+}
+
 @media (max-width: 768px) {
-  .table th:nth-child(3),
-  .table td:nth-child(3),
+  .table th:nth-child(2),
+  .table td:nth-child(2),
   .table th:nth-child(4),
   .table td:nth-child(4) {
     display: none;
   }
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .resizeHandle {
+    display: none;
+  }
+
+  .sidebar {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-height: 200px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .profileList {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.5rem;
+    gap: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .profileList li {
+    flex-shrink: 0;
+  }
+
+  .profileListItem {
+    min-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .profileListMeta {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 @media (max-width: 640px) {
+  .pageHeader {
+    padding: 0.875rem 1rem;
+  }
+
+  .pageTitle {
+    font-size: 1.1rem;
+  }
+
+  .main,
+  .formWrapper {
+    padding: 1rem;
+  }
+
+  .formPanel {
+    padding: 1.25rem 1.25rem;
+  }
+
+  .profileCard {
+    padding: 1.25rem 1.25rem;
+  }
+
+  .profileCardContact {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .profileCardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .profileCardActions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
   .table th,
   .table td {
     padding: 0.6rem 0.75rem;
@@ -459,13 +1117,9 @@
     font-size: 0.75rem;
   }
 
-  .headerRow {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
   .btnAddProfile {
-    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
   }
 }
 

@@ -68,15 +68,15 @@ e.g: tech stack in the job description is only python => for the major tech stac
 - No markdown, no "Updated Resume" or extra headers—only the resume text.
 
 **Output format (critical):**
-- Output ONLY the updated resume as plain text.
-- Use the EXACT same structure and section labels as the base resume:
+- Output ONLY the updated resume as plain text. This format is required for DOCX conversion.
+- Use the EXACT same structure (works with all 5 DOCX templates):
   - Line 1: Full name
-  - Line 2: Job title (updated) and key tech stack
+  - Line 2: Job title (updated) and key tech stack (subtitle)
   - Line 3: blank
-  - Line 4: contact (email, phone, location) with spaces/tabs between
+  - Line 4: email TAB phone TAB location (use tab or 2+ spaces between; required for parsing)
   - Line 5: blank
-  - PROFILE (heading), one summary paragraph, blank, then skill lines (Category: item1, item2, ...)
-  - WORK EXPERIENCE (heading), then for each job: Job Title – Company, date/location line, one description paragraph, bullet lines starting with "-"
-  - EDUCATION (heading), school – degree, date, location
-  - CERTIFICATIONS (heading), lines like "- Certification Name	Issuer"
-- Preserve blank lines and use tab between certification name and issuer where shown in base.
+  - Section headings: PROFILE or SUMMARY, SKILLS (if used), WORK EXPERIENCE (or EXPERIENCE), EDUCATION, CERTIFICATIONS
+  - For each job: "Job Title – Company" then next line "DateFrom – DateTo	TAB	Location" then optional description, then bullets with "-"
+  - Education: "Degree – Institution" then next line "DateFrom – DateTo	TAB	Location"
+  - Certifications: "- Cert Name	TAB	Issuer"
+- Use WORK EXPERIENCE as the section heading (templates accept EXPERIENCE or PROFESSIONAL EXPERIENCE as alias).

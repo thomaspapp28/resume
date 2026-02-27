@@ -1,8 +1,8 @@
 """Resume generation and file persistence logic."""
 
 import base64
+import json
 import re
-import tempfile
 from pathlib import Path
 
 from app.core.config import BASE_TEMPLATES_DIR, DATA_DIR, DATA_RESERVED_DIRS
@@ -81,27 +81,38 @@ def _strip_markdown_fence(text: str) -> str:
     return "\n".join(lines)
 
 
-def _load_base_resume_from_path(path: Path) -> str:
-    """Load base resume text from the given path."""
+def _load_base_resume(path: Path) -> tuple[str, dict | None]:
+    """Load base resume. Returns (text_for_prompt, json_dict_or_none)."""
     if not path.exists():
         raise FileNotFoundError(f"Base resume not found: {path}")
-    return path.read_text(encoding="utf-8").strip()
+    if path.suffix.lower() == ".json":
+        import json
+        from app.schemas.resume import json_to_text
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return json_to_text(data), data
+    return path.read_text(encoding="utf-8").strip(), None
 
 
 def _build_profile_context(profile: dict) -> str:
     """Build a profile context string for the generation prompt."""
     lines = ["CANDIDATE PROFILE (use this person's information in the resume):"]
     lines.append(f"- Name: {profile.get('full_name', '')}")
+    subtitle = profile.get("subtitle", "").strip()
+    if subtitle:
+        lines.append(f"- Subtitle / professional title: {subtitle}")
     lines.append(f"- Email: {profile.get('email', '')}")
     lines.append(f"- Location: {profile.get('location', '')}")
     lines.append(f"- Phone: {profile.get('phone', '')}")
+
     def _fmt_date(s: str) -> str:
         """Format YYYY-MM to 'Mon YYYY' or 'Present'."""
         if not s or s.lower() == "present":
             return "Present"
         if len(s) >= 7:
-            months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+            months = [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+            ]
             try:
                 y, m = s[:4], int(s[5:7])
                 return f"{months[m - 1]} {y}" if 1 <= m <= 12 else s
@@ -114,19 +125,38 @@ def _build_profile_context(profile: dict) -> str:
         lines.append("- Work experience:")
         for w in work:
             cn = w.get("company_name", "").strip()
+            jt = w.get("job_title", "").strip()
             df = _fmt_date(w.get("date_from", ""))
             dt = _fmt_date(w.get("date_to", ""))
-            if cn:
-                lines.append(f"  - {cn}: {df} to {dt}")
+            if cn or jt:
+                parts = []
+                if jt:
+                    parts.append(jt)
+                if cn:
+                    parts.append(f"at {cn}" if parts else cn)
+                if df or dt:
+                    parts.append(f"({df} to {dt})")
+                lines.append(f"  - {' '.join(parts)}")
     edu = profile.get("educations") or []
     if edu:
         lines.append("- Education:")
         for e in edu:
             inst = e.get("institution_name", "").strip()
+            degree = e.get("degree", "").strip()
+            field = e.get("field", "").strip()
             df = _fmt_date(e.get("date_from", ""))
             dt = _fmt_date(e.get("date_to", ""))
-            if inst:
-                lines.append(f"  - {inst}: {df} to {dt}")
+            if inst or degree or field:
+                parts = []
+                if degree:
+                    parts.append(degree)
+                if field:
+                    parts.append(f"in {field}" if parts else field)
+                if inst:
+                    parts.append(f"— {inst}" if parts else inst)
+                if df or dt:
+                    parts.append(f"({df} to {dt})")
+                lines.append(f"  - {' '.join(parts)}")
     return "\n".join(lines)
 
 
@@ -168,9 +198,13 @@ def generate_and_save_resume(
     base_path = (
         BASE_TEMPLATES_DIR / base_template
         if base_template and (BASE_TEMPLATES_DIR / base_template).exists()
-        else BASE_TEMPLATES_DIR / "base1.txt" if (BASE_TEMPLATES_DIR / "base1.txt").exists() else DEFAULT_BASE
+        else BASE_TEMPLATES_DIR / "base1.json"
+        if (BASE_TEMPLATES_DIR / "base1.json").exists()
+        else BASE_TEMPLATES_DIR / "base1.txt"
+        if (BASE_TEMPLATES_DIR / "base1.txt").exists()
+        else DEFAULT_BASE
     )
-    base_resume = _load_base_resume_from_path(base_path)
+    base_resume, _base_json = _load_base_resume(base_path)
     instruction_prompt = load_prompt(prompt_name or "default")
 
     if profile_id:
@@ -180,6 +214,7 @@ def generate_and_save_resume(
             if profile:
                 profile_dict = {
                     "full_name": profile.full_name,
+                    "subtitle": getattr(profile, "subtitle", None) or "",
                     "email": profile.email,
                     "location": profile.location,
                     "phone": profile.phone,
@@ -205,6 +240,18 @@ def generate_and_save_resume(
     (job_dir / "context.txt").write_text(resume_text, encoding="utf-8")
     saved_files: list[str] = ["jd.txt", "context.txt"]
 
+    from app.schemas.resume import text_to_json
+
+    try:
+        resume_json = text_to_json(resume_text)
+    except Exception:
+        resume_json = {"name": resume_text.split("\n")[0] if resume_text else "", "subtitle": "", "contact": {}, "summary": resume_text, "skills": [], "work_experience": [], "education": [], "certifications": []}
+    (job_dir / "resume.json").write_text(
+        json.dumps(resume_json, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    saved_files.append("resume.json")
+
     resume_file_base = _resume_name_to_file_base(resume_text)
     docx_filename = f"{resume_file_base}.docx"
     pdf_filename = f"{resume_file_base}.pdf"
@@ -216,17 +263,9 @@ def generate_and_save_resume(
     try:
         from app.services.docx_builder import build_resume_docx
 
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".txt", delete=False, encoding="utf-8"
-        ) as f_ctx:
-            f_ctx.write(resume_text)
-            ctx_path = f_ctx.name
-        try:
-            build_resume_docx(ctx_path, str(docx_path), template=docx_template)
-            docx_base64 = base64.b64encode(docx_path.read_bytes()).decode("ascii")
-            saved_files.append(docx_filename)
-        finally:
-            Path(ctx_path).unlink(missing_ok=True)
+        build_resume_docx(resume_json, str(docx_path), template=docx_template)
+        docx_base64 = base64.b64encode(docx_path.read_bytes()).decode("ascii")
+        saved_files.append(docx_filename)
     except Exception:
         docx_base64 = None
 

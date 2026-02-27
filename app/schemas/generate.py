@@ -31,7 +31,7 @@ class GenerateRequest(BaseModel):
         None,
         ge=1,
         le=5,
-        description="DOCX format template 1-5 (1=Classic, 2=Ryan Jackson, 3=Sean Greeley, 4=Corey Crandal, 5=Nelson Borges). Default 1.",
+        description="DOCX format template 1-5. Default 1.",
     )
 
 

@@ -6,10 +6,11 @@ from docx.shared import Pt, Inches, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
 from docx.oxml import parse_xml
 
-from app.core.config import BASE_DIR
-
 LINE_WIDTH = Inches(8.5 - 0.5 - 0.375)
-ADDRESS_ICON_PATH = BASE_DIR / "assets" / "address-icon.png"
+ICON_MAIL = "\u2709"
+ICON_PHONE = "\u260E"
+ICON_ADDRESS = "\u2302"
+SYMBOL_FONT = "Segoe UI Symbol"
 HEADER_FONT = "Cambria"  # Professional font for title, section headers, job titles
 FONT = "Arial"  # Body text, contact, bullets
 NAME_SIZE = Pt(20)
@@ -29,9 +30,8 @@ def build(context_path: str, output_path: str) -> None:
         return (parts[0].strip() if parts else "", parts[1].strip() if len(parts) > 1 else "")
 
     def split_contact(line):
-        parts = re.split(r"[\t ]{2,}", line.strip())
-        parts = [p.strip() for p in parts if p.strip()]
-        return (parts[0] if parts else "", parts[1] if len(parts) > 1 else "", parts[2] if len(parts) > 2 else "")
+        parts = [p.strip() for p in line.strip().split("\t")]
+        return (parts[0] if len(parts) > 0 else "", parts[1] if len(parts) > 1 else "", parts[2] if len(parts) > 2 else "")
 
     def split_cert(line):
         content = line.strip().lstrip("-• \t")
@@ -71,23 +71,21 @@ def build(context_path: str, output_path: str) -> None:
         c = doc.add_paragraph()
         c.paragraph_format.space_before = Pt(6)
         c.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        r1 = c.add_run(f"\u2709 {email} | \u260E {phone} | ")
-        r1.font.name = FONT
-        r1.font.size = Pt(11)
-        r1.font.color.rgb = RGBColor(0, 0, 0)
-        if ADDRESS_ICON_PATH.exists():
-            r2 = c.add_run()
-            r2.add_picture(str(ADDRESS_ICON_PATH), width=Pt(9), height=Pt(9))
-            r3 = c.add_run(f" {loc}")
-        else:
-            r3 = c.add_run(f"\u2316 {loc}")
-        r3.font.name = FONT
-        r3.font.size = Pt(11)
-        r3.font.color.rgb = RGBColor(0, 0, 0)
+        black = RGBColor(0, 0, 0)
+        contact_size = Pt(11)
+        for icon, text, sep in [(ICON_MAIL, email, " | "), (ICON_PHONE, phone, " | "), (ICON_ADDRESS, loc, "")]:
+            ri = c.add_run(f"{icon} ")
+            ri.font.name = SYMBOL_FONT
+            ri.font.size = contact_size
+            ri.font.color.rgb = black
+            rt = c.add_run(f"{text}{sep}")
+            rt.font.name = FONT
+            rt.font.size = contact_size
+            rt.font.color.rgb = black
 
     doc.add_paragraph()
 
-    headers = ("PROFILE", "SUMMARY", "PROFESSIONAL EXPERIENCE", "EDUCATION", "CERTIFICATIONS", "SKILLS")
+    headers = ("PROFILE", "SUMMARY", "WORK EXPERIENCE", "PROFESSIONAL EXPERIENCE", "EXPERIENCE", "EDUCATION", "CERTIFICATIONS", "SKILLS")
     first_section = True
     in_cert = in_profile = False
     first_skill = True

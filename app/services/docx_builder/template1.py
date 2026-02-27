@@ -6,10 +6,11 @@ from docx.shared import Pt, Inches, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
 from docx.oxml import parse_xml
 
-from app.core.config import BASE_DIR
-
 LINE_WIDTH = Inches(8.27 - 0.5 - 0.5)
-ADDRESS_ICON_PATH = BASE_DIR / "assets" / "address-icon.png"
+ICON_MAIL = "\u2709"   # ✉ envelope
+ICON_PHONE = "\u260E"  # ☎ phone
+ICON_ADDRESS = "\u2302"  # ⌂ house (address)
+SYMBOL_FONT = "Segoe UI Symbol"  # has glyphs for ✉ ☎ ⌂
 FONT = "Times New Roman"
 NAME_SIZE = Pt(18)
 SUBTITLE_SIZE = Pt(10)
@@ -33,9 +34,8 @@ def build(context_path: str, output_path: str) -> None:
         return (parts[0].strip() if parts else "", parts[1].strip() if len(parts) > 1 else "")
 
     def split_contact(line):
-        parts = re.split(r"[\t ]{2,}", line.strip())
-        parts = [p.strip() for p in parts if p.strip()]
-        return (parts[0] if parts else "", parts[1] if len(parts) > 1 else "", parts[2] if len(parts) > 2 else "")
+        parts = [p.strip() for p in line.strip().split("\t")]
+        return (parts[0] if len(parts) > 0 else "", parts[1] if len(parts) > 1 else "", parts[2] if len(parts) > 2 else "")
 
     def split_cert(line):
         content = line.strip().lstrip("-• \t")
@@ -71,23 +71,20 @@ def build(context_path: str, output_path: str) -> None:
         c.paragraph_format.space_before = Pt(6)
         c.paragraph_format.tab_stops.add_tab_stop(Inches(3.535), alignment=WD_TAB_ALIGNMENT.CENTER)
         c.paragraph_format.tab_stops.add_tab_stop(LINE_WIDTH, alignment=WD_TAB_ALIGNMENT.RIGHT)
-        r1 = c.add_run(f"\u2709 {email}\t\u260E {phone}\t")
-        r1.font.name = FONT
-        r1.font.size = CONTENT_SIZE
-        r1.font.color.rgb = RGBColor(0, 0, 0)
-        if ADDRESS_ICON_PATH.exists():
-            r2 = c.add_run()
-            r2.add_picture(str(ADDRESS_ICON_PATH), width=Pt(9), height=Pt(9))
-            r3 = c.add_run(f" {loc}")
-        else:
-            r3 = c.add_run(f"\u2316 {loc}")
-        r3.font.name = FONT
-        r3.font.size = CONTENT_SIZE
-        r3.font.color.rgb = RGBColor(0, 0, 0)
+        black = RGBColor(0, 0, 0)
+        for icon, text, sep in [(ICON_MAIL, email, "\t"), (ICON_PHONE, phone, "\t"), (ICON_ADDRESS, loc, "")]:
+            ri = c.add_run(f"{icon} ")
+            ri.font.name = SYMBOL_FONT
+            ri.font.size = CONTENT_SIZE
+            ri.font.color.rgb = black
+            rt = c.add_run(f"{text}{sep}")
+            rt.font.name = FONT
+            rt.font.size = CONTENT_SIZE
+            rt.font.color.rgb = black
 
     doc.add_paragraph()
 
-    headers = ("PROFILE", "SUMMARY", "SKILLS", "WORK EXPERIENCE", "EDUCATION", "CERTIFICATIONS")
+    headers = ("PROFILE", "SUMMARY", "SKILLS", "WORK EXPERIENCE", "EXPERIENCE", "PROFESSIONAL EXPERIENCE", "EDUCATION", "CERTIFICATIONS")
     first_section = True
     prev_section = None
     in_cert = in_profile = False
@@ -122,7 +119,7 @@ def build(context_path: str, output_path: str) -> None:
             section_paras.append(p)
             in_cert = s.upper() == "CERTIFICATIONS"
             in_profile = s.upper() in ("PROFILE", "SUMMARY", "SKILLS")
-            in_work = s.upper() == "WORK EXPERIENCE"
+            in_work = s.upper() in ("WORK EXPERIENCE", "EXPERIENCE", "PROFESSIONAL EXPERIENCE")
             if in_work:
                 first_job = True
             if in_profile:

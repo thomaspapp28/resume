@@ -12,12 +12,13 @@ class Profile(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     full_name = Column(String(200), default="")
+    subtitle = Column(String(300), default="")  # Professional title, e.g. "Senior Engineer | Python, React"
     email = Column(String(200), default="")
     location = Column(String(200), default="")
     phone = Column(String(50), default="")
-    # JSON: [{ "company_name": str, "date_from": str, "date_to": str }, ...]  # date as YYYY-MM
+    # JSON: [{ "company_name": str, "job_title": str, "date_from": str, "date_to": str }, ...]  # date as YYYY-MM
     work_experiences = Column(JSON, default=list)
-    # JSON: [{ "institution_name": str, "date_from": str, "date_to": str }, ...]  # date as YYYY-MM
+    # JSON: [{ "institution_name": str, "degree": str, "field": str, "date_from": str, "date_to": str }, ...]
     educations = Column(JSON, default=list)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

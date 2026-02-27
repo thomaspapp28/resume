@@ -4,6 +4,7 @@
   margin: 0 auto;
   padding: 2rem 1.5rem;
   text-align: left;
+  overflow-y: auto;
 }
 
 @media (min-width: 1024px) {
@@ -26,12 +27,64 @@
 }
 
 .title {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   font-size: 1.625rem;
   font-weight: 600;
   color: var(--text);
   margin: 0 0 0.5rem;
   letter-spacing: -0.02em;
+}
+
+.titleIcon {
+  color: var(--accent) !important;
+  font-size: 1.5rem !important;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.labelIcon {
+  color: var(--accent) !important;
+  font-size: 1rem !important;
+  opacity: 0.9;
+}
+
+.option label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.optionIcon {
+  color: var(--text-muted) !important;
+  font-size: 0.9rem !important;
+}
+
+.btnIcon {
+  font-size: 1.1rem !important;
+  margin-right: 0.35rem;
+  vertical-align: -0.2em;
+}
+
+.resultTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.resultTitleIcon {
+  color: var(--accent) !important;
+  font-size: 1.2rem !important;
 }
 
 .subtitle {
@@ -63,13 +116,6 @@
   box-shadow: 0 0 0 1px var(--border-focus);
 }
 
-.label {
-  display: block;
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: var(--text);
-  margin-bottom: 0.5rem;
-}
 
 .textarea {
   width: 100%;
@@ -130,7 +176,6 @@
 }
 
 .option label {
-  display: block;
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-secondary);
@@ -260,7 +305,7 @@
 }
 
 .resultTitle {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   font-size: 1.15rem;
   font-weight: 600;
   margin: 0 0 1rem;

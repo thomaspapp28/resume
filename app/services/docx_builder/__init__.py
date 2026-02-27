@@ -1,5 +1,10 @@
 """DOCX resume builder package. Five self-contained template modules."""
 
+import tempfile
+from pathlib import Path
+
+from app.schemas.resume import json_to_text
+
 from app.services.docx_builder.template1 import build as build_1, CONFIG as CONFIG_1
 from app.services.docx_builder.template2 import build as build_2, CONFIG as CONFIG_2
 from app.services.docx_builder.template3 import build as build_3, CONFIG as CONFIG_3
@@ -23,13 +28,31 @@ _TEMPLATES = {
 }
 
 
-def build_resume_docx(context_path: str, output_path: str, template: int = 1) -> None:
-    """Create a Word resume from context text.
-    template: 1-5 (1=Classic, 2=Ryan Jackson, 3=Sean Greeley, 4=Corey Crandal, 5=Nelson Borges)
+def build_resume_docx(
+    context_path: str | Path | dict,
+    output_path: str | Path,
+    template: int = 1,
+) -> None:
+    """Create a Word resume from context.
+    context_path: path to .txt file, or resume dict (JSON structure).
+    template: 1-5
     """
     if template not in _BUILDERS:
         template = 1
-    _BUILDERS[template](context_path, output_path)
+
+    if isinstance(context_path, dict):
+        text = json_to_text(context_path)
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".txt", delete=False, encoding="utf-8"
+        ) as f:
+            f.write(text)
+            ctx_path = f.name
+        try:
+            _BUILDERS[template](ctx_path, str(output_path))
+        finally:
+            Path(ctx_path).unlink(missing_ok=True)
+    else:
+        _BUILDERS[template](str(context_path), str(output_path))
 
 
 def list_docx_templates() -> list[dict]:
