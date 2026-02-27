@@ -1,3 +1,6 @@
+import FactCheckIcon from '@mui/icons-material/FactCheck'
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+import WarningAmberIcon from '@mui/icons-material/WarningAmber'
 import styles from './JobAnalysisResult.module.css'
 
 /**
@@ -18,7 +21,10 @@ export function JobAnalysisResult({
 
   return (
     <section className={styles.container}>
-      <h2 className={styles.title}>Analysis</h2>
+      <h2 className={styles.title}>
+        <FactCheckIcon className={styles.titleIcon} />
+        Analysis
+      </h2>
       <dl className={styles.grid}>
         <dt>Remote</dt>
         <dd>
@@ -77,6 +83,7 @@ export function JobAnalysisResult({
           disabled={generateLoading || !analysis.is_eligible}
           title={!analysis.is_eligible ? 'Use "Generate anyway" to override' : ''}
         >
+          <AutoAwesomeIcon className={styles.btnIcon} />
           {generateLoading ? 'Generating…' : 'Generate resume'}
         </button>
         {!analysis.is_eligible && (
@@ -86,6 +93,7 @@ export function JobAnalysisResult({
             onClick={onGenerateAnyway}
             disabled={generateLoading}
           >
+            <WarningAmberIcon className={styles.btnIcon} />
             Generate anyway
           </button>
         )}

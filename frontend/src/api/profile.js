@@ -3,6 +3,7 @@ import { apiFetch } from './client.js'
 /**
  * @typedef {Object} WorkExperience
  * @property {string} company_name
+ * @property {string} job_title
  * @property {string} date_from - YYYY-MM
  * @property {string} date_to - YYYY-MM
  */
@@ -10,6 +11,8 @@ import { apiFetch } from './client.js'
 /**
  * @typedef {Object} Education
  * @property {string} institution_name
+ * @property {string} degree
+ * @property {string} field
  * @property {string} date_from - YYYY-MM
  * @property {string} date_to - YYYY-MM
  */
@@ -18,6 +21,7 @@ import { apiFetch } from './client.js'
  * @typedef {Object} Profile
  * @property {number} id
  * @property {string} full_name
+ * @property {string} subtitle
  * @property {string} email
  * @property {string} location
  * @property {string} phone
@@ -71,6 +75,7 @@ export async function getProfile(id) {
 export async function createProfile(profile) {
   const body = {
     full_name: profile.full_name ?? '',
+    subtitle: profile.subtitle ?? '',
     email: profile.email ?? '',
     location: profile.location ?? '',
     phone: profile.phone ?? '',
@@ -99,6 +104,7 @@ export async function createProfile(profile) {
 export async function updateProfile(id, profile) {
   const body = {}
   if (profile.full_name !== undefined) body.full_name = profile.full_name
+  if (profile.subtitle !== undefined) body.subtitle = profile.subtitle
   if (profile.email !== undefined) body.email = profile.email
   if (profile.location !== undefined) body.location = profile.location
   if (profile.phone !== undefined) body.phone = profile.phone

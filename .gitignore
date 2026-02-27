@@ -31,5 +31,16 @@ Thumbs.db
 # Logs
 *.log
 
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Python testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Project output
 data/
 assets/

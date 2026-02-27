@@ -1,4 +1,15 @@
 import { useState } from 'react'
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+import DescriptionIcon from '@mui/icons-material/Description'
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
+import FolderOpenIcon from '@mui/icons-material/FolderOpen'
+import StyleIcon from '@mui/icons-material/Style'
+import PsychologyIcon from '@mui/icons-material/Psychology'
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
+import NoteIcon from '@mui/icons-material/Note'
+import AnalyticsIcon from '@mui/icons-material/Analytics'
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep'
 import { useResumeFlow } from '../../hooks/useResumeFlow'
 import { downloadBlob } from '../../lib/downloadBlob'
 import { JobAnalysisResult } from './JobAnalysisResult'
@@ -61,20 +72,28 @@ export function ResumeGenerator() {
     }
   }
 
-  const canGenerate = !optionsLoading && availableBases.length && jd.trim()
+  const canGenerate =
+    !optionsLoading &&
+    availableBases.length &&
+    jd.trim() &&
+    selectedProfileId != null
   const showAnalysis = analysis != null
 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Resume Tailor</h1>
+        <h1 className={styles.title}>
+          <AutoAwesomeIcon className={styles.titleIcon} />
+          Resume Tailor
+        </h1>
         <p className={styles.subtitle}>
-          Paste a job description, select profile and template, then generate. Analyze (optional) checks remote and clearance.
+          Paste a job description, select a profile and template, then generate. A profile is required. Analyze (optional) checks remote and clearance.
         </p>
       </header>
 
       <section className={styles.inputSection}>
         <label htmlFor="jd" className={styles.label}>
+          <DescriptionIcon className={styles.labelIcon} />
           Job description
         </label>
         <textarea
@@ -89,7 +108,10 @@ export function ResumeGenerator() {
 
       <section className={styles.optionsSection}>
         <div className={styles.option}>
-          <label htmlFor="profile-select">Profile (person)</label>
+          <label htmlFor="profile-select">
+            <PersonOutlineIcon className={styles.optionIcon} />
+            Profile (person)
+          </label>
           <select
             id="profile-select"
             value={selectedProfileId ?? ''}
@@ -97,14 +119,19 @@ export function ResumeGenerator() {
             className={styles.select}
             disabled={optionsLoading || loading}
           >
-            <option value="">— None (use template as-is) —</option>
+            <option value="">— None —</option>
             {profiles.map((p) => (
-              <option key={p.id} value={p.id}>{p.full_name || 'Unnamed'}</option>
+              <option key={p.id} value={p.id}>
+                {p.full_name || 'Unnamed'}{p.subtitle ? ` — ${p.subtitle}` : ''}
+              </option>
             ))}
           </select>
         </div>
         <div className={styles.option}>
-          <label htmlFor="base-select">Base resume</label>
+          <label htmlFor="base-select">
+            <FolderOpenIcon className={styles.optionIcon} />
+            Base resume
+          </label>
           <select
             id="base-select"
             value={selectedBase}
@@ -118,7 +145,10 @@ export function ResumeGenerator() {
           </select>
         </div>
         <div className={styles.option}>
-          <label htmlFor="docx-template-select">DOCX format</label>
+          <label htmlFor="docx-template-select">
+            <StyleIcon className={styles.optionIcon} />
+            DOCX format
+          </label>
           <select
             id="docx-template-select"
             value={selectedDocxTemplate}
@@ -132,7 +162,10 @@ export function ResumeGenerator() {
           </select>
         </div>
         <div className={styles.option}>
-          <label htmlFor="prompt-select">Prompt</label>
+          <label htmlFor="prompt-select">
+            <PsychologyIcon className={styles.optionIcon} />
+            Prompt
+          </label>
           <select
             id="prompt-select"
             value={selectedPrompt}
@@ -153,7 +186,9 @@ export function ResumeGenerator() {
           className={styles.btnPrimary}
           onClick={handleGenerate}
           disabled={!canGenerate || loading}
+          title={selectedProfileId == null ? 'Select a profile to generate' : ''}
         >
+          <AutoAwesomeIcon className={styles.btnIcon} />
           {generateLoading ? 'Generating…' : 'Generate resume'}
         </button>
         <button
@@ -162,19 +197,12 @@ export function ResumeGenerator() {
           onClick={handleAnalyze}
           disabled={loading}
         >
+          <AnalyticsIcon className={styles.btnIcon} />
           {analyzeLoading ? 'Analyzing…' : 'Analyze'}
-        </button>
-        <button
-          type="button"
-          className={styles.btnGhost}
-          onClick={handleGenerateAnyway}
-          disabled={!canGenerate || loading}
-          title="Skip eligibility check (remote, no clearance)"
-        >
-          Generate anyway
         </button>
         {(analysis || result) && (
           <button type="button" className={styles.btnGhost} onClick={clearAll}>
+            <DeleteSweepIcon className={styles.btnIcon} />
             Clear
           </button>
         )}
@@ -198,7 +226,10 @@ export function ResumeGenerator() {
 
       {result && (
         <section className={styles.resultSection}>
-          <h2 className={styles.resultTitle}>Tailored resume</h2>
+          <h2 className={styles.resultTitle}>
+            <AutoAwesomeIcon className={styles.resultTitleIcon} />
+            Tailored resume
+          </h2>
           <textarea
             className={styles.resultText}
             readOnly
@@ -207,6 +238,7 @@ export function ResumeGenerator() {
           />
           <div className={styles.resultActions}>
             <button type="button" className={styles.btnSecondary} onClick={handleCopy}>
+              <ContentCopyIcon className={styles.btnIcon} />
               Copy text
             </button>
             {result.docxBase64 && (
@@ -217,6 +249,7 @@ export function ResumeGenerator() {
                   downloadBlob(result.docxBase64, MIME_DOCX, result.docxFilename)
                 }
               >
+                <NoteIcon className={styles.btnIcon} />
                 Download .docx
               </button>
             )}
@@ -226,6 +259,7 @@ export function ResumeGenerator() {
                 className={styles.btnSecondary}
                 onClick={() => downloadBlob(result.pdfBase64, MIME_PDF, result.pdfFilename)}
               >
+                <PictureAsPdfIcon className={styles.btnIcon} />
                 Download .pdf
               </button>
             )}

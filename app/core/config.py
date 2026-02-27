@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DATA_DIR = BASE_DIR / "data"
 DB_PATH = DATA_DIR / "resume.db"
 BASE_TEMPLATES_DIR = DATA_DIR / "base"
-DEFAULT_BASE = BASE_TEMPLATES_DIR / "base1.txt"
+DEFAULT_BASE = BASE_TEMPLATES_DIR / "base1.json"
 PROMPTS_DIR = BASE_DIR / "prompts"
 
 # Reserved dirs (excluded from job-dir scan)
@@ -26,11 +26,12 @@ PROMPT_KEYWORDS: list[tuple[str, str]] = [
 
 
 def list_available_bases() -> list[str]:
-    """Return sorted list of base template filenames."""
+    """Return sorted list of base template filenames (.json preferred, .txt fallback)."""
     if not BASE_TEMPLATES_DIR.exists():
         return []
-    files = [p.name for p in BASE_TEMPLATES_DIR.iterdir() if p.is_file() and p.suffix == ".txt"]
-    return sorted(files)
+    json_files = [p.name for p in BASE_TEMPLATES_DIR.iterdir() if p.is_file() and p.suffix == ".json"]
+    txt_files = [p.name for p in BASE_TEMPLATES_DIR.iterdir() if p.is_file() and p.suffix == ".txt"]
+    return sorted(set(json_files) | set(txt_files))
 
 
 def list_available_prompts() -> list[str]:

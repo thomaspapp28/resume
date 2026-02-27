@@ -29,8 +29,12 @@ def init_db():
     Base.metadata.create_all(bind=engine)
 
     with engine.connect() as conn:
-        try:
-            conn.execute(text("ALTER TABLE profiles ADD COLUMN educations TEXT DEFAULT '[]'"))
-            conn.commit()
-        except Exception:
-            conn.rollback()
+        for col, default in [
+            ("educations", "'[]'"),
+            ("subtitle", "''"),
+        ]:
+            try:
+                conn.execute(text(f"ALTER TABLE profiles ADD COLUMN {col} TEXT DEFAULT {default}"))
+                conn.commit()
+            except Exception:
+                conn.rollback()
