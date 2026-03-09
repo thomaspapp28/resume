@@ -58,7 +58,7 @@ export function useResumeFlow() {
       if (cancelled) return
       setOptionsLoading(false)
       if (optRes.data) {
-        const bases = optRes.data.available_bases ?? ['base1.txt']
+        const bases = optRes.data.available_bases ?? ['Full_Stack.json']
         const prompts = optRes.data.available_prompts ?? ['default']
         const templates = optRes.data.docx_templates ?? []
         setAvailableBases(bases)

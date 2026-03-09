@@ -13,7 +13,7 @@ class GenerateRequest(BaseModel):
     )
     base_template: str | None = Field(
         None,
-        description="Base template filename (e.g. base1.txt). If omitted, uses base1.txt.",
+        description="Base template filename (e.g. Full_Stack.json). If omitted, uses Full_Stack.json.",
     )
     prompt_name: str | None = Field(
         None,

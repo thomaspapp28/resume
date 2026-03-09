@@ -18,7 +18,7 @@ class Profile(Base):
     phone = Column(String(50), default="")
     # JSON: [{ "company_name": str, "job_title": str, "date_from": str, "date_to": str }, ...]  # date as YYYY-MM
     work_experiences = Column(JSON, default=list)
-    # JSON: [{ "institution_name": str, "degree": str, "field": str, "date_from": str, "date_to": str }, ...]
+    # JSON: [{ "university": str, "degree": str, "field": str, "date_from": str, "date_to": str }, ...]
     educations = Column(JSON, default=list)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

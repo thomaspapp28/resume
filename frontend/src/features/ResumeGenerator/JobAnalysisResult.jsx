@@ -50,12 +50,19 @@ export function JobAnalysisResult({
         <select
           id="base-select"
           value={selectedBase}
-          onChange={(e) => onSelectBase(e.target.value)}
+          onChange={(e) => {
+            const base = e.target.value
+            onSelectBase(base)
+            const stem = base.replace(/\.(json|txt)$/, '')
+            if (prompts.includes(stem)) {
+              onSelectPrompt(stem)
+            }
+          }}
           className={styles.select}
         >
           {bases.map((b) => (
             <option key={b} value={b}>
-              {b}
+              {b.replace(/\.(json|txt)$/, '')}
             </option>
           ))}
         </select>

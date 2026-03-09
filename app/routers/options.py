@@ -15,7 +15,7 @@ def get_options():
     prompts = list_available_prompts()
     docx_templates = list_docx_templates()
     return {
-        "available_bases": bases if bases else ["base1.json"],
+        "available_bases": bases if bases else ["Full_Stack.json"],
         "available_prompts": prompts,
         "docx_templates": docx_templates,
     }

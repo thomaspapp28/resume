@@ -4,12 +4,14 @@ import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined'
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import { useThemeMode } from '../ThemeProvider'
 import styles from './Sidebar.module.css'
 
 const NAV_ITEMS = [
+  { id: 'jobs', label: 'Job dashboard', Icon: WorkOutlineIcon },
   { id: 'profile', label: 'Profile', Icon: PersonOutlineIcon },
   { id: 'resume', label: 'Resume Tailor', Icon: DescriptionOutlinedIcon },
 ]

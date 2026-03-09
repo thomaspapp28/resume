@@ -34,29 +34,28 @@ def generate_resume(
     instruction_prompt: str | None = None,
     model: str = "claude-sonnet-4-20250514",
 ) -> str:
-    # """Call Claude to tailor base resume to job description. Returns resume text."""
-    # if not instruction_prompt:
-    #     from app.core.config import get_prompt_for_job, load_prompt
-    #     prompt_name = get_prompt_for_job(job_description)
-    #     instruction_prompt = load_prompt(prompt_name)
+    """Call Claude to tailor base resume to job description. Returns resume text."""
+    if not instruction_prompt:
+        from app.core.config import get_prompt_for_job, load_prompt
+        prompt_name = get_prompt_for_job(job_description)
+        instruction_prompt = load_prompt(prompt_name)
 
-    # user_content = (
-    #     f"{instruction_prompt}\n\n---\n\n"
-    #     "**BASE RESUME (style and structure to preserve):**\n\n"
-    #     f"{base_resume}\n\n---\n\n"
-    #     f"{job_description}\n\n---\n\n"
-    #     "Produce the updated resume as plain text only, in the same structure as the base resume."
-    # )
+    user_content = (
+        f"{instruction_prompt}\n\n---\n\n"
+        "**BASE RESUME (style and structure to preserve):**\n\n"
+        f"{base_resume}\n\n---\n\n"
+        f"{job_description}\n\n---\n\n"
+        "Produce the updated resume as plain text only, in the same structure as the base resume."
+    )
 
-    # client = _get_client()
-    # response = client.messages.create(
-    #     model=os.environ.get("GENERATION_MODEL", model),
-    #     max_tokens=8192,
-    #     system=_get_system_prompt(),
-    #     messages=[{"role": "user", "content": user_content}],
-    # )
-    # text = response.content[0].text
-    text = base_resume
+    client = _get_client()
+    response = client.messages.create(
+        model=os.environ.get("GENERATION_MODEL", model),
+        max_tokens=8192,
+        system=_get_system_prompt(),
+        messages=[{"role": "user", "content": user_content}],
+    )
+    text = response.content[0].text
     return text.strip() if text else ""
 
 

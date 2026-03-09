@@ -15,17 +15,17 @@ def analyze(body: AnalyzeRequest):
     jd = body.job_description.strip()
     analysis = analyze_job(jd)
     available = list_available_bases()
-    suggested_base = available[0] if available else "base1.txt"
+    suggested_base = available[0] if available else "Full_Stack.json"
     prompts = list_available_prompts()
     suggested_prompt = get_prompt_for_job(jd)
     if suggested_prompt not in prompts:
-        suggested_prompt = "default"
+        suggested_prompt = "Other" if "Other" in prompts else (prompts[0] if prompts else "default")
     return AnalyzeResponse(
         is_remote=analysis.is_remote,
         requires_clearance=analysis.requires_clearance,
         is_eligible=analysis.is_eligible,
         suggested_base=suggested_base,
         suggested_prompt=suggested_prompt,
-        available_bases=available or ["base1.txt"],
+        available_bases=available or ["Full_Stack.json"],
         available_prompts=prompts,
     )

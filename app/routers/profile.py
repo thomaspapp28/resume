@@ -14,7 +14,21 @@ from app.schemas.profile import (
 router = APIRouter()
 
 
+def _normalize_education(e: dict) -> dict:
+    """Ensure education dict has 'university' (same as institution). Backward compat: read institution_name."""
+    u = (e.get("university") or e.get("institution_name") or "").strip()
+    return {
+        "university": u,
+        "degree": (e.get("degree") or "").strip(),
+        "field": (e.get("field") or "").strip(),
+        "date_from": (e.get("date_from") or "").strip(),
+        "date_to": (e.get("date_to") or "").strip(),
+    }
+
+
 def _profile_to_response(p: Profile) -> ProfileResponse:
+    raw_edu = getattr(p, "educations", None) or []
+    educations = [_normalize_education(e) for e in raw_edu]
     return ProfileResponse(
         id=p.id,
         full_name=p.full_name or "",
@@ -23,7 +37,7 @@ def _profile_to_response(p: Profile) -> ProfileResponse:
         location=p.location or "",
         phone=p.phone or "",
         work_experiences=p.work_experiences or [],
-        educations=getattr(p, "educations", None) or [],
+        educations=educations,
         created_at=p.created_at.isoformat() if p.created_at else "",
         updated_at=p.updated_at.isoformat() if p.updated_at else "",
     )
@@ -46,7 +60,8 @@ def get_profile(profile_id: int, db: Session = Depends(get_db)):
     profile = db.query(Profile).filter(Profile.id == profile_id).first()
     if not profile:
         raise HTTPException(status_code=404, detail="Profile not found")
-    educations = _get_educations(profile)
+    raw_edu = _get_educations(profile)
+    educations = [_normalize_education(e) for e in raw_edu]
     return ProfileResponse(
         id=profile.id,
         full_name=profile.full_name or "",
@@ -81,7 +96,7 @@ def create_profile(body: ProfileCreate, db: Session = Depends(get_db)):
         ],
         educations=[
             {
-                "institution_name": e.institution_name,
+                "university": e.university,
                 "degree": e.degree,
                 "field": e.field,
                 "date_from": e.date_from,
@@ -126,7 +141,7 @@ def update_profile(profile_id: int, body: ProfileUpdate, db: Session = Depends(g
     if body.educations is not None:
         profile.educations = [
             {
-                "institution_name": e.institution_name,
+                "university": e.university,
                 "degree": e.degree,
                 "field": e.field,
                 "date_from": e.date_from,

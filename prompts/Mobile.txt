@@ -22,6 +22,7 @@ e.g: Android Engineer | Kotlin, Jetpack Compose, MVVM
 - Early roles: Period-appropriate (older SDKs, Objective-C, Java for Android). No anachronisms.
 - First sentence per company: app/product focus. Last company domain aligns with JD.
 - Keep same companies and dates. Use exact versions from JD (Swift 5, Kotlin 1.9, React Native 0.72, etc.) when given.
+- Write work experience so total content length is about 120–130% of the base resume: use slightly more bullets per role and/or slightly longer bullet text where it adds value.
 - Latest 2 positions: update job titles. Past/present tense as appropriate.
 
 **5. Certifications**

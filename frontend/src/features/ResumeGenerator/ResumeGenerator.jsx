@@ -119,7 +119,7 @@ export function ResumeGenerator() {
             className={styles.select}
             disabled={optionsLoading || loading}
           >
-            <option value="">— None —</option>
+            <option value="">— Select a profile —</option>
             {profiles.map((p) => (
               <option key={p.id} value={p.id}>
                 {p.full_name || 'Unnamed'}{p.subtitle ? ` — ${p.subtitle}` : ''}
@@ -135,12 +135,19 @@ export function ResumeGenerator() {
           <select
             id="base-select"
             value={selectedBase}
-            onChange={(e) => setSelectedBase(e.target.value)}
+            onChange={(e) => {
+              const base = e.target.value
+              setSelectedBase(base)
+              const stem = base.replace(/\.(json|txt)$/, '')
+              if (availablePrompts.includes(stem)) {
+                setSelectedPrompt(stem)
+              }
+            }}
             className={styles.select}
             disabled={optionsLoading || loading}
           >
             {availableBases.map((b) => (
-              <option key={b} value={b}>{b}</option>
+              <option key={b} value={b}>{b.replace(/\.(json|txt)$/, '')}</option>
             ))}
           </select>
         </div>
@@ -157,7 +164,7 @@ export function ResumeGenerator() {
             disabled={optionsLoading || loading}
           >
             {(docxTemplates.length ? docxTemplates : [{ id: 1, name: 'Classic' }]).map((t) => (
-              <option key={t.id} value={t.id}>Template {t.id}: {t.name}</option>
+              <option key={t.id} value={t.id}>{t.name}</option>
             ))}
           </select>
         </div>

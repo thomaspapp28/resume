@@ -30,7 +30,8 @@ def build(context_path: str, output_path: str) -> None:
         pPr.append(parse_xml(bdr))
 
     def split_date_loc(line):
-        parts = re.split(r"[\t ]{2,}", line.strip(), maxsplit=1)
+        # Match tab or 2+ spaces (schema uses single tab between period and location)
+        parts = re.split(r"\t|  +", line.strip(), maxsplit=1)
         return (parts[0].strip() if parts else "", parts[1].strip() if len(parts) > 1 else "")
 
     def split_contact(line):
@@ -157,7 +158,7 @@ def build(context_path: str, output_path: str) -> None:
                     continue
 
         next_s = lines[i + 1].strip() if i + 1 < len(lines) else ""
-        if next_s and ("–" in s or " - " in s) and any(x in next_s for x in ["Present", "202", "Remote", "FL", "CA", "USA"]):
+        if next_s and ("–" in s or " - " in s) and any(x in next_s for x in ["Present", "202", "201", "200", "Remote", "FL", "CA", "USA", "Gainesville", "Santa Clara"]):
             p = doc.add_paragraph()
             if in_work and not first_job:
                 p.paragraph_format.space_before = Pt(10)
@@ -239,4 +240,4 @@ def build(context_path: str, output_path: str) -> None:
     doc.save(output_path)
 
 
-CONFIG = {"id": 2, "name": "template2"}
+CONFIG = {"id": 2, "name": "Template 2"}

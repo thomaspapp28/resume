@@ -35,7 +35,7 @@ const emptyWorkExp = () => ({
 })
 
 const emptyEducation = () => ({
-  institution_name: '',
+  university: '',
   degree: '',
   field: '',
   date_from: defaultDateFrom(),
@@ -122,11 +122,11 @@ function lastWorkExperience(workExperiences) {
 function lastEducation(educations) {
   const arr = educations ?? []
   if (!arr.length) return { institution: '—', degree: '', period: '' }
-  const sorted = [...arr].filter((e) => e.date_to || e.date_from || e.institution_name?.trim() || e.degree?.trim() || e.field?.trim()).sort(
+  const sorted = [...arr].filter((e) => e.date_to || e.date_from || (e.university ?? e.institution_name)?.trim() || e.degree?.trim() || e.field?.trim()).sort(
     (a, b) => sortKeyForDate(b.date_to || b.date_from).localeCompare(sortKeyForDate(a.date_to || a.date_from))
   )
   const last = sorted[0] ?? arr[arr.length - 1]
-  const institution = last.institution_name?.trim() || '—'
+  const institution = (last.university ?? last.institution_name)?.trim() || '—'
   const degree = last.degree?.trim() || ''
   const period = formatDateRange(last.date_from, last.date_to)
   return { institution, degree, period }
@@ -185,7 +185,7 @@ function ProfileForm({ profileId, onSave, onCancel, initialData }) {
   const [educations, setEducations] = useState(
     initialData?.educations?.length
       ? initialData.educations.map((e) => ({
-          institution_name: e.institution_name ?? '',
+          university: e.university ?? e.institution_name ?? '',
           degree: e.degree ?? '',
           field: e.field ?? '',
           date_from: e.date_from || defaultDateFrom(),
@@ -228,9 +228,13 @@ function ProfileForm({ profileId, onSave, onCancel, initialData }) {
       ...w,
       date_to: w.date_to === PRESENT ? 'present' : w.date_to,
     }))
-    const eduExps = educations.filter((e) => e.institution_name.trim() || e.degree.trim() || e.field.trim() || e.date_from || e.date_to).map((e) => ({
-      ...e,
-      date_to: e.date_to === PRESENT ? 'present' : e.date_to,
+    const u = (e) => (e.university ?? e.institution_name ?? '').trim()
+    const eduExps = educations.filter((e) => u(e) || e.degree.trim() || e.field.trim() || e.date_from || e.date_to).map((e) => ({
+      university: u(e),
+      degree: (e.degree || '').trim(),
+      field: (e.field || '').trim(),
+      date_from: (e.date_from || '').trim(),
+      date_to: e.date_to === PRESENT ? 'present' : (e.date_to || '').trim(),
     }))
     const payload = {
       full_name: fullName,
@@ -395,7 +399,7 @@ function ProfileForm({ profileId, onSave, onCancel, initialData }) {
           <SchoolIcon className={styles.sectionIcon} />
           Education
         </h2>
-        <p className={styles.hint}>Degree, field of study, institution, and period.</p>
+        <p className={styles.hint}>Degree, field of study, university, and period. Each entry is one education (university) record.</p>
         {educations.map((ed, idx) => (
           <div key={idx} className={styles.entryCard}>
             <div className={styles.entryRow}>
@@ -420,12 +424,12 @@ function ProfileForm({ profileId, onSave, onCancel, initialData }) {
             </div>
             <div className={styles.entryRow}>
               <div className={styles.entryField} style={{ flex: 1 }}>
-                <label>Institution</label>
+                <label>University</label>
                 <input
                   type="text"
-                  value={ed.institution_name}
-                  onChange={(e) => updateEducation(idx, 'institution_name', e.target.value)}
-                  placeholder="University or school name"
+                  value={ed.university ?? ed.institution_name ?? ''}
+                  onChange={(e) => updateEducation(idx, 'university', e.target.value)}
+                  placeholder="e.g. University name"
                 />
               </div>
             </div>
@@ -832,7 +836,7 @@ export function ProfileManager({ addProfileRef, onFormVisibleChange }) {
                         {(selectedProfile.educations ?? []).map((e, idx) => {
                           const degree = (e.degree || '').trim()
                           const field = (e.field || '').trim()
-                          const institution = (e.institution_name || '').trim()
+                          const institution = (e.university ?? e.institution_name ?? '').trim()
                           const degreeField = [degree, field].filter(Boolean).join(' in ')
                           const period = formatDateRange(e.date_from, e.date_to)
                           const titlePart = degreeField && institution

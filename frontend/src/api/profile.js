@@ -10,7 +10,7 @@ import { apiFetch } from './client.js'
 
 /**
  * @typedef {Object} Education
- * @property {string} institution_name
+ * @property {string} university - University / school name (same as education institution)
  * @property {string} degree
  * @property {string} field
  * @property {string} date_from - YYYY-MM

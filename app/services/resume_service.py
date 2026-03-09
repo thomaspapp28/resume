@@ -2,11 +2,15 @@
 
 import base64
 import json
+import logging
 import re
+import time
 from pathlib import Path
 
 from app.core.config import BASE_TEMPLATES_DIR, DATA_DIR, DATA_RESERVED_DIRS
 from app.job_analyzer import analyze_job  # for remote/clearance only
+
+logger = logging.getLogger(__name__)
 
 
 def _next_unique_number() -> int:
@@ -141,7 +145,7 @@ def _build_profile_context(profile: dict) -> str:
     if edu:
         lines.append("- Education:")
         for e in edu:
-            inst = e.get("institution_name", "").strip()
+            inst = (e.get("university") or e.get("institution_name") or "").strip()
             degree = e.get("degree", "").strip()
             field = e.get("field", "").strip()
             df = _fmt_date(e.get("date_from", ""))
@@ -170,7 +174,7 @@ def generate_and_save_resume(
 ) -> dict:
     """
     Generate tailored resume from job description, save to data dir, return response dict.
-    - base_template: optional filename (e.g. base1.txt); if omitted, uses base1.txt.
+    - base_template: optional filename (e.g. Full_Stack.json); if omitted, uses Full_Stack.json.
     - prompt_name: optional prompt name (e.g. full_stack_backend, ai_ml); if omitted, uses default.
     - force: if True, skip eligibility check (remote, no clearance).
     - profile_id: optional profile (person) to use; if provided, profile data is injected into the prompt.
@@ -198,10 +202,10 @@ def generate_and_save_resume(
     base_path = (
         BASE_TEMPLATES_DIR / base_template
         if base_template and (BASE_TEMPLATES_DIR / base_template).exists()
-        else BASE_TEMPLATES_DIR / "base1.json"
-        if (BASE_TEMPLATES_DIR / "base1.json").exists()
-        else BASE_TEMPLATES_DIR / "base1.txt"
-        if (BASE_TEMPLATES_DIR / "base1.txt").exists()
+        else BASE_TEMPLATES_DIR / "Full_Stack.json"
+        if (BASE_TEMPLATES_DIR / "Full_Stack.json").exists()
+        else BASE_TEMPLATES_DIR / "Full_Stack.txt"
+        if (BASE_TEMPLATES_DIR / "Full_Stack.txt").exists()
         else DEFAULT_BASE
     )
     base_resume, _base_json = _load_base_resume(base_path)
@@ -266,17 +270,38 @@ def generate_and_save_resume(
         build_resume_docx(resume_json, str(docx_path), template=docx_template)
         docx_base64 = base64.b64encode(docx_path.read_bytes()).decode("ascii")
         saved_files.append(docx_filename)
-    except Exception:
+        logger.info("DOCX generated: %s", docx_filename)
+    except Exception as e:
+        logger.error("DOCX generation failed: %s", e)
         docx_base64 = None
 
     try:
+        import pythoncom
         from docx2pdf import convert
 
-        convert(str(docx_path), str(pdf_path))
+        for attempt in range(3):
+            try:
+                pythoncom.CoInitialize()
+                try:
+                    convert(str(docx_path), str(pdf_path))
+                finally:
+                    pythoncom.CoUninitialize()
+                break
+            except Exception as retry_err:
+                logger.warning("PDF conversion attempt %d failed: %s", attempt + 1, retry_err)
+                if attempt < 2:
+                    time.sleep(2)
         if pdf_path.exists():
             pdf_base64 = base64.b64encode(pdf_path.read_bytes()).decode("ascii")
             saved_files.append(pdf_filename)
-    except Exception:
+            logger.info("PDF generated: %s", pdf_filename)
+        else:
+            logger.error("PDF not created after conversion for %s", docx_filename)
+    except ImportError as e:
+        logger.error("PDF conversion not available: %s", e)
+        pdf_base64 = None
+    except Exception as e:
+        logger.error("PDF conversion failed: %s", e)
         pdf_base64 = None
 
     return {

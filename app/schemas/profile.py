@@ -1,6 +1,6 @@
 """Pydantic schemas for profile API."""
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 
 class WorkExperience(BaseModel):
@@ -11,11 +11,20 @@ class WorkExperience(BaseModel):
 
 
 class Education(BaseModel):
-    institution_name: str = ""
+    university: str = ""  # Same as education institution (university / school name)
     degree: str = ""
     field: str = ""  # Field of study
     date_from: str = ""  # YYYY-MM
     date_to: str = ""  # YYYY-MM
+
+    @model_validator(mode="before")
+    @classmethod
+    def accept_institution_name(cls, data):
+        """Accept old 'institution_name' from client and map to university."""
+        if isinstance(data, dict) and "institution_name" in data and not data.get("university"):
+            data = dict(data)
+            data["university"] = data.get("institution_name", "")
+        return data
 
 
 class ProfileCreate(BaseModel):

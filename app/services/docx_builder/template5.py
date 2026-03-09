@@ -251,4 +251,4 @@ def build(context_path: str, output_path: str) -> None:
     doc.save(output_path)
 
 
-CONFIG = {"id": 5, "name": "template5"}
+CONFIG = {"id": 5, "name": "Template 5"}

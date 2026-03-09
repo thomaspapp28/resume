@@ -1,0 +1,363 @@
+.page {
+  padding: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 1rem;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.fetchBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.fetchBtn:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.fetchBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.search {
+  flex: 1;
+  min-width: 180px;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.search::placeholder {
+  color: var(--text-muted);
+}
+
+.search:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.filters {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  padding: 0.35rem 0.75rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.filterBtn:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.filterBtn.active {
+  background: var(--accent-muted);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.pageSizeLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.pageSizeSelect {
+  padding: 0.35rem 0.5rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.counts {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.countPill {
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.countPill.new {
+  background: var(--accent-muted);
+  color: var(--accent);
+}
+
+.countPill.normal {
+  background: var(--surface-hover);
+  color: var(--text-secondary);
+}
+
+.countPill.applied {
+  background: var(--success-muted);
+  color: var(--success);
+}
+
+.countPill.total {
+  background: var(--surface);
+  color: var(--text-muted);
+}
+
+.lastFetch {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.statusBar {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.statusBar.info {
+  background: var(--accent-muted);
+  color: var(--accent);
+}
+
+.statusBar.success {
+  background: var(--success-muted);
+  color: var(--success);
+}
+
+.statusBar.error {
+  background: var(--error-muted);
+  color: var(--error);
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.paginationInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.paginationButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.paginationBtn {
+  padding: 0.4rem 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.paginationBtn:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+}
+
+.paginationBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.jobList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.jobCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.jobCard:hover {
+  border-color: var(--accent);
+  background: var(--surface-hover);
+}
+
+.jobCardLink {
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.jobCardActions {
+  flex-shrink: 0;
+}
+
+.applyBtn {
+  padding: 0.35rem 0.75rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.applyBtn:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.applyBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.appliedLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--success);
+}
+
+.jobTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+
+.jobMeta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.jobStatus {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  margin-left: auto;
+}
+
+.jobStatus.new {
+  background: var(--accent-muted);
+  color: var(--accent);
+}
+
+.jobStatus.normal {
+  background: var(--surface-hover);
+  color: var(--text-muted);
+}
+
+.jobStatus.applied {
+  background: var(--success-muted);
+  color: var(--success);
+}
+
+.empty {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.empty p {
+  margin: 0 0 0.5rem;
+}
+
+.empty small {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-right: 0.35rem;
+  vertical-align: -0.2em;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
