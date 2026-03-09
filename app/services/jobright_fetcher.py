@@ -206,12 +206,31 @@ def _parse_job(item: dict, source: str, market: str, index: int = 0) -> dict:
         or _location_str(company_result.get("location")) or _first(company_result, "city", "address")
     )
 
-    # Description (full job description)
+    # Description (full job description). If missing, build from summary + coreResponsibilities + skillSummaries.
     description = (
-        _first(job_data, "description", "jobDescription", "desc", "content", "fullDescription", "summary", "requirements")
-        or _first(job_detail, "description", "jobDescription", "content", "fullDescription", "summary", "requirements")
+        _first(
+            job_data,
+            "description", "jobDescription", "desc", "content", "fullDescription", "summary", "requirements",
+        )
+        or _first(
+            job_detail,
+            "description", "jobDescription", "content", "fullDescription", "summary", "requirements",
+        )
         or _first(item, "description", "jobDescription", "content")
     )
+    if not description:
+        jd_parts: list[str] = []
+        summary = job_data.get("jobSummary") or job_data.get("summary")
+        if isinstance(summary, str) and summary.strip():
+            jd_parts.append(summary.strip())
+        for field in ("coreResponsibilities", "skillSummaries", "responsibilities", "requirements"):
+            val = job_data.get(field)
+            if isinstance(val, list):
+                for line in val:
+                    if isinstance(line, str) and line.strip():
+                        jd_parts.append(line.strip())
+        if jd_parts:
+            description = "\n".join(jd_parts)
 
     # Salary
     salary_raw = job_data.get("salary") or job_data.get("salaryRange") or job_data.get("salaryInfo")
@@ -342,6 +361,8 @@ def fetch_page(client: httpx.Client, position: int, cookie: str, since_ts: Optio
         )
         if response.status_code == 200:
             data = response.json()
+            for key, value in data.items():
+                print(key, value)
 
             # Response can be a top-level array (e.g. [] or list of jobs)
             if isinstance(data, list):

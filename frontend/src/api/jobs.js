@@ -103,6 +103,22 @@ export async function updateJobStatus(jobId, status) {
 }
 
 /**
+ * @param {number} jobId
+ * @returns {Promise<{ data?: any, error?: string }>}
+ */
+export async function getJob(jobId) {
+  const res = await apiFetch(`api/jobs/${jobId}`)
+  const data = await res.json().catch(() => ({}))
+  if (!res.ok) {
+    const message = Array.isArray(data.detail)
+      ? data.detail.map((d) => d.msg).join(' ')
+      : data.detail || data.error || 'Request failed'
+    return { error: message }
+  }
+  return { data }
+}
+
+/**
  * @returns {Promise<{ data?: { last_fetch_at: string | null }, error?: string }>}
  */
 export async function getLastFetchTime() {

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import OpenInNewIcon from '@mui/icons-material/OpenInNew'
-import { listJobs, getJobCounts, triggerFetch, getFetchStatus, getLastFetchTime, updateJobStatus } from '../../api/jobs'
+import { listJobs, getJobCounts, triggerFetch, getFetchStatus, getLastFetchTime, updateJobStatus, getJob } from '../../api/jobs'
 import styles from './JobrightJobs.module.css'
 
 const PAGE_SIZE_OPTIONS = [10, 20, 50]
@@ -18,6 +18,9 @@ export function JobrightJobs() {
   const [page, setPage] = useState(1)
   const [limit, setLimit] = useState(20)
   const [applyingId, setApplyingId] = useState(null)
+  const [selectedJobId, setSelectedJobId] = useState(null)
+  const [selectedJob, setSelectedJob] = useState(null)
+  const [jobDetailLoading, setJobDetailLoading] = useState(false)
 
   const loadJobs = useCallback(async () => {
     setLoading(true)
@@ -94,6 +97,10 @@ export function JobrightJobs() {
     e.preventDefault()
     e.stopPropagation()
     if (job.status === 'applied' || applyingId === job.id) return
+    const jobUrl = (job.url || '').trim()
+    if (jobUrl) {
+      window.open(jobUrl, '_blank', 'noopener,noreferrer')
+    }
     setApplyingId(job.id)
     const { data, error } = await updateJobStatus(job.id, 'applied')
     setApplyingId(null)
@@ -102,6 +109,21 @@ export function JobrightJobs() {
       return
     }
     setJobs((prev) => prev.map((j) => (j.id === job.id ? { ...j, status: 'applied' } : j)))
+    setSelectedJob((prev) => (prev && prev.id === job.id ? { ...prev, status: 'applied' } : prev))
+  }
+
+  async function handleSelectJob(job) {
+    if (!job || !job.id) return
+    setSelectedJobId(job.id)
+    setJobDetailLoading(true)
+    const { data, error } = await getJob(job.id)
+    setJobDetailLoading(false)
+    if (error) {
+      setStatusMessage({ text: error, type: 'error' })
+      setSelectedJob(null)
+      return
+    }
+    setSelectedJob(data || null)
   }
 
   return (
@@ -172,110 +194,140 @@ export function JobrightJobs() {
         </div>
       )}
 
-      {loading ? (
-        <div className={styles.empty}>
-          <p>Loading jobs…</p>
-        </div>
-      ) : jobs.length === 0 ? (
-        <div className={styles.empty}>
-          <p>No jobs yet.</p>
-          <small>
-            Click &quot;Fetch from Jobright&quot; to pull job links from Jobright (requires JOBRIGHT_COOKIE configured on the server).
-          </small>
-        </div>
-      ) : (
-        <>
-        <ul className={styles.jobList}>
-          {jobs.map((job) => {
-            const jobUrl = (job.url || '').trim()
-            const isApplied = job.status === 'applied'
-            const cardContent = (
-              <>
-                {jobUrl ? (
-                  <a
-                    href={jobUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.jobCardLink}
-                  >
-                    <div className={styles.jobTitle}>{job.title || 'Untitled'}</div>
-                    <div className={styles.jobMeta}>
-                      {job.company && <span>{job.company}</span>}
-                      {job.location && <span>{job.location}</span>}
-                      {job.salary && <span>{job.salary}</span>}
-                      <OpenInNewIcon sx={{ fontSize: 14, opacity: 0.7 }} />
-                    </div>
-                  </a>
-                ) : (
-                  <div className={styles.jobCardLink}>
-                    <div className={styles.jobTitle}>{job.title || 'Untitled'}</div>
-                    <div className={styles.jobMeta}>
-                      {job.company && <span>{job.company}</span>}
-                      {job.location && <span>{job.location}</span>}
-                      {job.salary && <span>{job.salary}</span>}
+      <div className={styles.content}>
+        <div className={styles.listColumn}>
+          {loading ? (
+            <div className={styles.empty}>
+              <p>Loading jobs…</p>
+            </div>
+          ) : jobs.length === 0 ? (
+            <div className={styles.empty}>
+              <p>No jobs yet.</p>
+              <small>
+                Click &quot;Fetch from Jobright&quot; to pull job links from Jobright (requires JOBRIGHT_COOKIE configured on the server).
+              </small>
+            </div>
+          ) : (
+            <>
+              <ul className={styles.jobList}>
+                {jobs.map((job) => {
+                  const jobUrl = (job.url || '').trim()
+                  const isApplied = job.status === 'applied'
+                  const isSelected = selectedJobId === job.id
+                  return (
+                    <li key={job.id}>
+                      <button
+                        type="button"
+                        className={`${styles.jobCard} ${isSelected ? styles.jobCardSelected : ''}`}
+                        onClick={() => handleSelectJob(job)}
+                      >
+                        <div className={styles.jobMain}>
+                          <div className={styles.jobTitle}>{job.title || 'Untitled'}</div>
+                          <div className={styles.jobMeta}>
+                            {job.company && <span>{job.company}</span>}
+                            {job.location && <span>{job.location}</span>}
+                            {job.salary && <span>{job.salary}</span>}
+                          </div>
+                        </div>
+                        <div className={styles.jobCardActions}>
+                          {isApplied ? (
+                            <span className={styles.appliedLabel}>Applied</span>
+                          ) : (
+                            <button
+                              type="button"
+                              className={styles.applyBtn}
+                              onClick={(e) => handleApply(e, job)}
+                              disabled={applyingId === job.id}
+                            >
+                              {applyingId === job.id ? '…' : 'Apply'}
+                            </button>
+                          )}
+                        </div>
+                      </button>
+                    </li>
+                  )
+                })}
+              </ul>
+              {(() => {
+                const totalForFilter = search.trim() ? null : counts.total
+                const totalPages = totalForFilter != null ? Math.ceil(totalForFilter / limit) || 1 : null
+                const hasNext = totalPages != null ? page < totalPages : jobs.length >= limit
+                const hasPrev = page > 1
+                return (
+                  <div className={styles.pagination}>
+                    <span className={styles.paginationInfo}>
+                      {totalPages != null
+                        ? `Page ${page} of ${totalPages} (${totalForFilter} jobs)`
+                        : `Page ${page}`}
+                    </span>
+                    <div className={styles.paginationButtons}>
+                      <button
+                        type="button"
+                        className={styles.paginationBtn}
+                        disabled={!hasPrev}
+                        onClick={() => setPage((p) => Math.max(1, p - 1))}
+                        aria-label="Previous page"
+                      >
+                        Previous
+                      </button>
+                      <button
+                        type="button"
+                        className={styles.paginationBtn}
+                        disabled={!hasNext}
+                        onClick={() => setPage((p) => p + 1)}
+                        aria-label="Next page"
+                      >
+                        Next
+                      </button>
                     </div>
                   </div>
+                )
+              })()}
+            </>
+          )}
+        </div>
+        <aside className={styles.detailColumn}>
+          {jobDetailLoading && (
+            <div className={styles.detailCard}>
+              <p>Loading job details…</p>
+            </div>
+          )}
+          {!jobDetailLoading && selectedJob && (
+            <div className={styles.detailCard}>
+              <h2 className={styles.detailTitle}>{selectedJob.title || 'Untitled'}</h2>
+              <div className={styles.detailCompany}>{selectedJob.company || ''}</div>
+              <div className={styles.detailMeta}>
+                {selectedJob.location && <span>{selectedJob.location}</span>}
+                {selectedJob.salary && <span>{selectedJob.salary}</span>}
+                {selectedJob.job_type && <span>{selectedJob.job_type}</span>}
+                {selectedJob.posted_date && <span>Posted: {selectedJob.posted_date}</span>}
+              </div>
+              <div className={styles.detailActions}>
+                {selectedJob.status === 'applied' ? (
+                  <span className={styles.appliedLabel}>Applied</span>
+                ) : (
+                  <button
+                    type="button"
+                    className={styles.applyBtn}
+                    onClick={(e) => handleApply(e, selectedJob)}
+                    disabled={applyingId === selectedJob.id}
+                  >
+                    {applyingId === selectedJob.id ? '…' : 'Apply'}
+                  </button>
                 )}
-                <div className={styles.jobCardActions}>
-                  {isApplied ? (
-                    <span className={styles.appliedLabel}>Applied</span>
-                  ) : (
-                    <button
-                      type="button"
-                      className={styles.applyBtn}
-                      onClick={(e) => handleApply(e, job)}
-                      disabled={applyingId === job.id}
-                    >
-                      {applyingId === job.id ? '…' : 'Apply'}
-                    </button>
-                  )}
-                </div>
-              </>
-            )
-            return (
-              <li key={job.id}>
-                <div className={styles.jobCard}>{cardContent}</div>
-              </li>
-            )
-          })}
-        </ul>
-        {(() => {
-          const totalForFilter = search.trim() ? null : counts.total
-          const totalPages = totalForFilter != null ? Math.ceil(totalForFilter / limit) || 1 : null
-          const hasNext = totalPages != null ? page < totalPages : jobs.length >= limit
-          const hasPrev = page > 1
-          return (
-            <div className={styles.pagination}>
-              <span className={styles.paginationInfo}>
-                {totalPages != null
-                  ? `Page ${page} of ${totalPages} (${totalForFilter} jobs)`
-                  : `Page ${page}`}
-              </span>
-              <div className={styles.paginationButtons}>
-                <button
-                  type="button"
-                  className={styles.paginationBtn}
-                  disabled={!hasPrev}
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  aria-label="Previous page"
-                >
-                  Previous
-                </button>
-                <button
-                  type="button"
-                  className={styles.paginationBtn}
-                  disabled={!hasNext}
-                  onClick={() => setPage((p) => p + 1)}
-                  aria-label="Next page"
-                >
-                  Next
-                </button>
+              </div>
+              <div className={styles.detailDescription}>
+                {selectedJob.description || 'No job description provided.'}
               </div>
             </div>
-          )
-        })()}
-        </>
-      )}
+          )}
+          {!jobDetailLoading && !selectedJob && (
+            <div className={styles.detailPlaceholder}>
+              <p>Select a job on the left to see its description here.</p>
+            </div>
+          )}
+        </aside>
+      </div>
     </div>
   )
 }
